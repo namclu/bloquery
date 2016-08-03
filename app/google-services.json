@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "997170182489",
+    "firebase_url": "https://bloquery-b95a8.firebaseio.com",
+    "project_id": "bloquery-b95a8",
+    "storage_bucket": "bloquery-b95a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997170182489:android:20ed4ff78e1fa8e6",
+        "android_client_info": {
+          "package_name": "com.namclu.android.bloquery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997170182489-rfmp6mfd06sfkpfveugd1ceon6jlosk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDODjeZicrtHtCxvsI15aX9h5BJLIR8YZg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
