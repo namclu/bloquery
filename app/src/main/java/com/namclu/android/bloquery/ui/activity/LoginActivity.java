@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.namclu.android.bloquery.R;
 
@@ -20,8 +19,8 @@ public class LoginActivity extends AppCompatActivity{
 
     private EditText _inputEmail;
     private EditText _inputPassword;
-    private TextView _createAccountLink;
     private Button _loginButton;
+    private TextView _createAccountLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +30,10 @@ public class LoginActivity extends AppCompatActivity{
         // Views
         _inputEmail = (EditText) findViewById(R.id.input_email);
         _inputPassword = (EditText) findViewById(R.id.input_password);
-        _createAccountLink = (TextView) findViewById(R.id.link_create_account);
 
         // Buttons
         _loginButton = (Button) findViewById(R.id.button_login);
+        _createAccountLink = (TextView) findViewById(R.id.link_create_account);
 
         // Listener for Login button
         _loginButton.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +50,9 @@ public class LoginActivity extends AppCompatActivity{
         _createAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Start the create account activity
-                Toast.makeText(LoginActivity.this, "New account pending...", Toast.LENGTH_SHORT).show();
+                // Start the signup activity
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
             }
         });
 

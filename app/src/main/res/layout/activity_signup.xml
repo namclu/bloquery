@@ -4,7 +4,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,6 +12,18 @@
         android:paddingTop="56dp"
         android:paddingLeft="@dimen/login_vertical_padding"
         android:paddingRight="@dimen/login_vertical_padding">
+
+        <!-- Name Label -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/input_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="@string/prompt_name"/>
+        </android.support.design.widget.TextInputLayout>
 
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
@@ -39,26 +51,26 @@
                 android:hint="@string/prompt_password"/>
         </android.support.design.widget.TextInputLayout>
 
-        <!-- Login Button -->
+        <!-- Create Account Button -->
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button_login"
+            android:id="@+id/button_create_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/button_vertical_margin"
             android:layout_marginBottom="@dimen/button_vertical_margin"
             android:padding="12dp"
             android:layout_gravity="center"
-            android:text="@string/action_login"/>
+            android:text="@string/action_create_account"/>
 
         <!-- Create Account text option-->
         <TextView
-            android:id="@+id/link_create_account"
+            android:id="@+id/link_login_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/login_vertical_padding"
             android:textSize="@dimen/login_text_size"
             android:gravity="center"
-            android:text="@string/link_signup"/>
+            android:text="@string/link_login"/>
 
     </LinearLayout>
 

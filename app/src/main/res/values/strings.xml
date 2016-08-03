@@ -1,17 +1,26 @@
 <resources>
     <string name="app_name">Bloquery</string>
-    <string name="hello_world">Hello, World!</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_signup">Sign Up</string>
+    <string name="title_activity_login">Log In</string>
     <string name="title_activity_bloquery">Bloquery</string>
 
-    <!-- Strings related to login -->
+    <!-- General strings -->
     <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+
+    <!-- Strings related to Signup -->
+    <string name="action_create_account">Create account</string>
+    <string name="link_login">Already have an account? Login</string>
+
+    <!-- Strings related to Login -->
     <string name="action_login">Login</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="create_an_account">Create an account?</string>
+    <string name="link_signup">Need an account? Sign Up</string>
+
+    <!-- Strings related to Bloquery -->
+    <string name="hello_world">Hello, World!</string>
+
+    <!-- Strings related to errors -->
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>

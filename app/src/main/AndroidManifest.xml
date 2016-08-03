@@ -14,10 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Login Activity -->
-        <activity
-            android:name=".ui.activity.LoginActivity"
-            android:label="@string/title_activity_login">
+        <!-- Signup Activity -->
+        <activity android:name=".ui.activity.SignupActivity"
+            android:label="@string/title_activity_signup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,8 +24,15 @@
             </intent-filter>
         </activity>
 
+        <!-- Login Activity -->
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:label="@string/title_activity_login">
+        </activity>
+
         <!-- BloQuery Activity -->
-        <activity android:name=".ui.activity.BloQueryActivity"
+        <activity
+            android:name=".ui.activity.BloQueryActivity"
             android:label="@string/title_activity_bloquery">
         </activity>
     </application>
