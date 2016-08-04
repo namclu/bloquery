@@ -74,6 +74,10 @@ public class SignupActivity extends AppCompatActivity{
                 if (user != null){
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
+                    // Send user to main activity
+                    Intent intent = new Intent(SignupActivity.this, BloQueryActivity.class);
+                    startActivity(intent);
                 }else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -118,6 +122,7 @@ public class SignupActivity extends AppCompatActivity{
         }
     }
 
+    // Create a new account
     private void createAccount(String email, String password){
 
         Log.d(TAG, "createAccount:" + email);
@@ -168,18 +173,24 @@ public class SignupActivity extends AppCompatActivity{
         if (TextUtils.isEmpty(name)){
             _inputName.setError(getString(R.string.error_field_required));
             valid = false;
+        } else {
+            _inputName.setError(null);
         }
 
         String email = _inputEmail.getText().toString();
         if (TextUtils.isEmpty(email)){
             _inputEmail.setError(getString(R.string.error_field_required));
             valid = false;
+        } else {
+            _inputEmail.setError(null);
         }
 
         String password = _inputPassword.getText().toString();
         if (TextUtils.isEmpty(password)){
             _inputPassword.setError(getString(R.string.error_field_required));
             valid = false;
+        } else {
+            _inputPassword.setError(null);
         }
 
         return valid;
