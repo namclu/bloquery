@@ -2,6 +2,9 @@ package com.namclu.android.bloquery.api.model;
 
 /**
  * Created by namlu on 31-Jul-16.
+ *
+ * UserLogin.java is the data model that captures info needed for user login only.
+ *
  */
 public class UserLogin {
     private String fullName;

@@ -7,6 +7,8 @@ import com.namclu.android.bloquery.R;
 
 /**
  * Created by namlu on 30-Jul-16.
+ *
+ * BloQueryActivity.java is the default main screen of the app.
  */
 public class BloQueryActivity extends Activity{
 

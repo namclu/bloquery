@@ -12,6 +12,15 @@ import com.namclu.android.bloquery.R;
 
 /**
  * Created by namlu on 30-Jul-16.
+ *
+ * LoginActivity.java handles logging in a user who already has an account.
+ *
+ * Before:
+ * User provides their account Email and Password to login
+ * After:
+ * If successful, user is logged into their account and is present with Main screen
+ * Other:
+ * If user doesn't have an account, they can be taken to Signup screen
  */
 public class LoginActivity extends AppCompatActivity{
     private static final String TAG = "LoginActivity";
