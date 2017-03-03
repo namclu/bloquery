@@ -35,10 +35,10 @@ public class LoginActivity extends AppCompatActivity{
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    private EditText _inputEmail;
-    private EditText _inputPassword;
-    private Button _loginButton;
-    private TextView _createAccountLink;
+    private EditText mInputEmail;
+    private EditText mInputPassword;
+    private Button mLoginButton;
+    private TextView mCreateAccountLink;
 
     // Firebase create auth
     private FirebaseAuth mAuth;
@@ -52,12 +52,12 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
 
         // Views
-        _inputEmail = (EditText) findViewById(R.id.input_email);
-        _inputPassword = (EditText) findViewById(R.id.input_password);
+        mInputEmail = (EditText) findViewById(R.id.input_email);
+        mInputPassword = (EditText) findViewById(R.id.input_password);
 
         // Buttons
-        _loginButton = (Button) findViewById(R.id.button_login);
-        _createAccountLink = (TextView) findViewById(R.id.link_create_account);
+        mLoginButton = (Button) findViewById(R.id.button_login);
+        mCreateAccountLink = (TextView) findViewById(R.id.link_create_account);
 
         // Firebase initialize auth
         mAuth = FirebaseAuth.getInstance();
@@ -83,17 +83,17 @@ public class LoginActivity extends AppCompatActivity{
         };
 
         // Listener for Login button
-        _loginButton.setOnClickListener(new View.OnClickListener() {
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // If successful, take user to initial screen.
                 // Otherwise show an error
-                signIn(_inputEmail.getText().toString(), _inputPassword.getText().toString());
+                signIn(mInputEmail.getText().toString(), mInputPassword.getText().toString());
             }
         });
 
         // Listener for Create Account
-        _createAccountLink.setOnClickListener(new View.OnClickListener() {
+        mCreateAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Start the signup activity
@@ -164,20 +164,20 @@ public class LoginActivity extends AppCompatActivity{
         boolean valid = true;
 
         // Validate Email, and Password
-        String email = _inputEmail.getText().toString();
+        String email = mInputEmail.getText().toString();
         if (TextUtils.isEmpty(email)){
-            _inputEmail.setError(getString(R.string.error_field_required));
+            mInputEmail.setError(getString(R.string.error_field_required));
             valid = false;
         } else{
-            _inputEmail.setError(null);
+            mInputEmail.setError(null);
         }
 
-        String password = _inputPassword.getText().toString();
+        String password = mInputPassword.getText().toString();
         if (TextUtils.isEmpty(password)){
-            _inputPassword.setError(getString(R.string.error_field_required));
+            mInputPassword.setError(getString(R.string.error_field_required));
             valid = false;
         }else {
-            _inputPassword.setError(null);
+            mInputPassword.setError(null);
         }
 
         return valid;

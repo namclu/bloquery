@@ -37,11 +37,11 @@ public class SignUpActivity extends AppCompatActivity{
 
     private static final String TAG = "SignUpActivity";
 
-    private EditText _inputName;
-    private EditText _inputEmail;
-    private EditText _inputPassword;
-    private Button _createAccountButton;
-    private TextView _loginLink;
+    private EditText mInputName;
+    private EditText mInputEmail;
+    private EditText mInputPassword;
+    private Button mCreateAccountButton;
+    private TextView mLoginLink;
 
     // Firebase create auth
     private FirebaseAuth mAuth;
@@ -55,13 +55,13 @@ public class SignUpActivity extends AppCompatActivity{
         setContentView(R.layout.activity_signup);
 
         // Views
-        _inputName = (EditText) findViewById(R.id.input_name);
-        _inputEmail = (EditText) findViewById(R.id.input_email);
-        _inputPassword = (EditText) findViewById(R.id.input_password);
+        mInputName = (EditText) findViewById(R.id.input_name);
+        mInputEmail = (EditText) findViewById(R.id.input_email);
+        mInputPassword = (EditText) findViewById(R.id.input_password);
 
         // Buttons
-        _createAccountButton = (Button) findViewById(R.id.button_create_account);
-        _loginLink = (TextView) findViewById(R.id.link_login_account);
+        mCreateAccountButton = (Button) findViewById(R.id.button_create_account);
+        mLoginLink = (TextView) findViewById(R.id.link_login_account);
 
         // Firebase initialize auth
         mAuth = FirebaseAuth.getInstance();
@@ -87,18 +87,18 @@ public class SignUpActivity extends AppCompatActivity{
         };
 
         // Listener for Create Account button
-        _createAccountButton.setOnClickListener(new View.OnClickListener() {
+        mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // If successful, create a new user account and log user in
                 // Else show an error
                 Toast.makeText(SignUpActivity.this, "New account pending...", Toast.LENGTH_SHORT).show();
-                createAccount(_inputEmail.getText().toString(), _inputPassword.getText().toString());
+                createAccount(mInputEmail.getText().toString(), mInputPassword.getText().toString());
             }
         });
 
         // Listener for Login link
-        _loginLink.setOnClickListener(new View.OnClickListener() {
+        mLoginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Start the Login activity
@@ -169,28 +169,28 @@ public class SignUpActivity extends AppCompatActivity{
         boolean valid = true;
 
         // Validate Name, Email, and Password
-        String name = _inputName.getText().toString();
+        String name = mInputName.getText().toString();
         if (TextUtils.isEmpty(name)){
-            _inputName.setError(getString(R.string.error_field_required));
+            mInputName.setError(getString(R.string.error_field_required));
             valid = false;
         } else {
-            _inputName.setError(null);
+            mInputName.setError(null);
         }
 
-        String email = _inputEmail.getText().toString();
+        String email = mInputEmail.getText().toString();
         if (TextUtils.isEmpty(email)){
-            _inputEmail.setError(getString(R.string.error_field_required));
+            mInputEmail.setError(getString(R.string.error_field_required));
             valid = false;
         } else {
-            _inputEmail.setError(null);
+            mInputEmail.setError(null);
         }
 
-        String password = _inputPassword.getText().toString();
+        String password = mInputPassword.getText().toString();
         if (TextUtils.isEmpty(password)){
-            _inputPassword.setError(getString(R.string.error_field_required));
+            mInputPassword.setError(getString(R.string.error_field_required));
             valid = false;
         } else {
-            _inputPassword.setError(null);
+            mInputPassword.setError(null);
         }
 
         return valid;
