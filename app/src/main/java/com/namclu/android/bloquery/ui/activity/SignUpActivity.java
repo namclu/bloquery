@@ -71,14 +71,15 @@ public class SignUpActivity extends AppCompatActivity{
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
+                if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
                     // Send user to main activity
                     Intent intent = new Intent(SignUpActivity.this, BloqueryActivity.class);
                     startActivity(intent);
-                }else {
+                    finish();
+                } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -104,6 +105,8 @@ public class SignUpActivity extends AppCompatActivity{
                 // Start the Login activity
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
+
             }
         });
     }

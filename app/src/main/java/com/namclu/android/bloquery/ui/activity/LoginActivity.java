@@ -74,6 +74,8 @@ public class LoginActivity extends AppCompatActivity{
                     // Send user to main activity
                     Intent intent = new Intent(LoginActivity.this, BloqueryActivity.class);
                     startActivity(intent);
+                    finish();
+
                 }else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -99,6 +101,8 @@ public class LoginActivity extends AppCompatActivity{
                 // Start the signup activity
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+                finish();
+
             }
         });
     }
