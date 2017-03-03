@@ -22,7 +22,7 @@ import com.namclu.android.bloquery.R;
 /**
  * Created by namlu on 03-Aug-16.
  *
- * SignupActivity.java handles the task of signing up and creating a user account for a new user.
+ * SignUpActivity.java handles the task of signing up and creating a user account for a new user.
  *
  * Before:
  * User provides a Name, Email and a Password
@@ -33,9 +33,9 @@ import com.namclu.android.bloquery.R;
  * If user already has an account, they can skip to Login screen
  *
  */
-public class SignupActivity extends AppCompatActivity{
+public class SignUpActivity extends AppCompatActivity{
 
-    private static final String TAG = "SignupActivity";
+    private static final String TAG = "SignUpActivity";
 
     private EditText _inputName;
     private EditText _inputEmail;
@@ -76,7 +76,7 @@ public class SignupActivity extends AppCompatActivity{
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
                     // Send user to main activity
-                    Intent intent = new Intent(SignupActivity.this, BloQueryActivity.class);
+                    Intent intent = new Intent(SignUpActivity.this, BloqueryActivity.class);
                     startActivity(intent);
                 }else {
                     // User is signed out
@@ -92,7 +92,7 @@ public class SignupActivity extends AppCompatActivity{
             public void onClick(View view) {
                 // If successful, create a new user account and log user in
                 // Else show an error
-                Toast.makeText(SignupActivity.this, "New account pending...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "New account pending...", Toast.LENGTH_SHORT).show();
                 createAccount(_inputEmail.getText().toString(), _inputPassword.getText().toString());
             }
         });
@@ -102,7 +102,7 @@ public class SignupActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 // Start the Login activity
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -144,7 +144,7 @@ public class SignupActivity extends AppCompatActivity{
                         // If sign in succeeds the auth state listener will be notified
                         // and logic to handle the signed in user can be handled in the listener.
                         if (!task.isSuccessful()){
-                            Toast.makeText(SignupActivity.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
                         }
 
                         // @Todo

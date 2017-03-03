@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity{
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
                     // Send user to main activity
-                    Intent intent = new Intent(LoginActivity.this, BloQueryActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, BloqueryActivity.class);
                     startActivity(intent);
                 }else {
                     // User is signed out
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 // Start the signup activity
-                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });

@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <!-- Signup Activity -->
-        <activity android:name=".ui.activity.SignupActivity"
+        <activity android:name=".ui.activity.SignUpActivity"
             android:label="@string/title_activity_signup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -32,7 +32,7 @@
 
         <!-- BloQuery Activity -->
         <activity
-            android:name=".ui.activity.BloQueryActivity"
+            android:name=".ui.activity.BloqueryActivity"
             android:label="@string/title_activity_bloquery">
         </activity>
     </application>
