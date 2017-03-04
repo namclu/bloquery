@@ -43,10 +43,10 @@ public class SignUpActivity extends AppCompatActivity{
     private Button mCreateAccountButton;
     private TextView mLoginLink;
 
-    // Firebase create auth
+    // Create reference to Firebase mAuth
     private FirebaseAuth mAuth;
 
-    // Firebase create authStateListener
+    // Create reference to Firebase mAuthStateListener
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
@@ -63,13 +63,13 @@ public class SignUpActivity extends AppCompatActivity{
         mCreateAccountButton = (Button) findViewById(R.id.button_create_account);
         mLoginLink = (TextView) findViewById(R.id.link_login_account);
 
-        // Firebase initialize auth
+        // Firebase initialize mAuth
         mAuth = FirebaseAuth.getInstance();
 
-        // Set AuthStateListener to respond to changes in user signin state
+        // Create AuthStateListener to respond to changes in user signin state
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null){
                     // User is signed in
