@@ -7,37 +7,37 @@ package com.namclu.android.bloquery.api.model;
  *
  */
 public class UserLogin {
-    private String fullName;
-    private String email;
-    private String password;
+    private String mFullName;
+    private String mEmail;
+    private String mPassword;
 
     public UserLogin(String fullName, String email, String password) {
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
+        mFullName = fullName;
+        mEmail = email;
+        mPassword = password;
     }
 
     public String getFullName() {
-        return fullName;
+        return mFullName;
     }
 
     public void setFullName(String fullName) {
-        this.fullName = fullName;
+        mFullName = fullName;
     }
 
     public String getEmail() {
-        return email;
+        return mEmail;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        mEmail = email;
     }
 
     public String getPassword() {
-        return password;
+        return mPassword;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        mPassword = password;
     }
 }

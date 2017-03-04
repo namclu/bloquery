@@ -7,47 +7,47 @@ package com.namclu.android.bloquery.api.model;
  *
  */
 public class UserAccount {
-    private long userID;
-    private boolean userImage;
-    private String userBio;
-    private String userLocation;
+    private long mUserID;
+    private boolean mUserImage;
+    private String mUserBio;
+    private String mUserLocation;
 
     public UserAccount(long userID, boolean userImage, String userBio, String userLocation) {
-        this.userID = userID;
-        this.userImage = userImage;
-        this.userBio = userBio;
-        this.userLocation = userLocation;
+        mUserID = userID;
+        mUserImage = userImage;
+        mUserBio = userBio;
+        mUserLocation = userLocation;
     }
 
     public long getUserID() {
-        return userID;
+        return mUserID;
     }
 
     public void setUserID(long userID) {
-        this.userID = userID;
+        mUserID = userID;
     }
 
     public boolean isUserImage() {
-        return userImage;
+        return mUserImage;
     }
 
     public void setUserImage(boolean userImage) {
-        this.userImage = userImage;
+        mUserImage = userImage;
     }
 
     public String getUserBio() {
-        return userBio;
+        return mUserBio;
     }
 
     public void setUserBio(String userBio) {
-        this.userBio = userBio;
+        mUserBio = userBio;
     }
 
     public String getUserLocation() {
-        return userLocation;
+        return mUserLocation;
     }
 
     public void setUserLocation(String userLocation) {
-        this.userLocation = userLocation;
+        mUserLocation = userLocation;
     }
 }
