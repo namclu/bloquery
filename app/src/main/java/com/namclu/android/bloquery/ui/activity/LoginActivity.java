@@ -40,10 +40,10 @@ public class LoginActivity extends AppCompatActivity{
     private Button mLoginButton;
     private TextView mCreateAccountLink;
 
-    // Firebase create auth
+    // Firebase declare a reference to mAuth
     private FirebaseAuth mAuth;
 
-    // Firebase create authStateListener
+    // Firebase declare a reference to mAuthStateListener
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity{
         // Firebase initialize auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Set AuthStateListener to respond to changes in user signin state
+        // Create AuthStateListener to respond to changes in user signin state
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -74,6 +74,9 @@ public class LoginActivity extends AppCompatActivity{
                     // Send user to main activity
                     Intent intent = new Intent(LoginActivity.this, BloqueryActivity.class);
                     startActivity(intent);
+
+                    // Call to destroy an activity
+                    finish();
                 }else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -99,6 +102,7 @@ public class LoginActivity extends AppCompatActivity{
                 // Start the signup activity
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
