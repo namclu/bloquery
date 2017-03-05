@@ -2,9 +2,8 @@ package com.namclu.android.bloquery.api.model;
 
 /**
  * Created by namlu on 31-Jul-16.
- *
+ * <p>
  * UserAccount.java is the data model the reflects the user's data after they've logged in.
- *
  */
 public class UserAccount {
     private long mUserID;

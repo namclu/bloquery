@@ -21,9 +21,9 @@ import com.namclu.android.bloquery.R;
 
 /**
  * Created by namlu on 03-Aug-16.
- *
+ * <p>
  * SignUpActivity.java handles the task of signing up and creating a user account for a new user.
- *
+ * <p>
  * Before:
  * User provides a Name, Email and a Password
  * After:
@@ -31,11 +31,10 @@ import com.namclu.android.bloquery.R;
  * presented with the Main screen
  * Other:
  * If user already has an account, they can skip to Login screen
- *
  */
-public class SignUpActivity extends AppCompatActivity{
+public class SignUpActivity extends AppCompatActivity {
 
-    private static final String TAG = "SignUpActivity";
+    private static final String TAG = SignUpActivity.class.getSimpleName();
 
     private EditText mInputName;
     private EditText mInputEmail;
@@ -63,15 +62,15 @@ public class SignUpActivity extends AppCompatActivity{
         mCreateAccountButton = (Button) findViewById(R.id.button_create_account);
         mLoginLink = (TextView) findViewById(R.id.link_login_account);
 
-        // Firebase initialize mAuth
+        // Initialize Firebase mAuth object
         mAuth = FirebaseAuth.getInstance();
 
         // Create AuthStateListener to respond to changes in user signin state
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
+                if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
@@ -79,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity{
                     Intent intent = new Intent(SignUpActivity.this, BloqueryActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
+                } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -119,23 +118,23 @@ public class SignUpActivity extends AppCompatActivity{
     @Override
     protected void onStop() {
         super.onStop();
-        if (mAuthStateListener != null){
+        if (mAuthStateListener != null) {
             mAuth.removeAuthStateListener(mAuthStateListener);
         }
     }
 
     // Create a new account
-    private void createAccount(String email, String password){
+    private void createAccount(String email, String password) {
 
         Log.d(TAG, "createAccount:" + email);
-        if(!validateForm()){
+        if (!validateForm()) {
             return;
         }
 
         // @Todo
         //showProgressDialog();
 
-        // Create user with email
+        // Create user with email and password
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -145,8 +144,13 @@ public class SignUpActivity extends AppCompatActivity{
                         // If sign in fails, display a message to the user.
                         // If sign in succeeds the auth state listener will be notified
                         // and logic to handle the signed in user can be handled in the listener.
-                        if (!task.isSuccessful()){
-                            Toast.makeText(SignUpActivity.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(SignUpActivity.this, R.string.auth_failed,
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SignUpActivity.this,
+                                    "Welcome " + mAuth.getCurrentUser().getEmail(),
+                                    Toast.LENGTH_SHORT).show();
                         }
 
                         // @Todo
@@ -156,45 +160,45 @@ public class SignUpActivity extends AppCompatActivity{
     }
 
     // @Todo
-    private void updateUI(FirebaseUser user){
+    private void updateUI(FirebaseUser user) {
         // @Todo
         //hideProgressDialog();
-        if (user != null){
+        if (user != null) {
 
-        }else {
+        } else {
 
         }
     }
 
-    // @Todo
-    private boolean validateForm(){
-        boolean valid = true;
+    // Checks if valid data has been given for sign up
+    private boolean validateForm() {
+        boolean isValid = true;
 
         // Validate Name, Email, and Password
         String name = mInputName.getText().toString();
-        if (TextUtils.isEmpty(name)){
+        if (TextUtils.isEmpty(name)) {
             mInputName.setError(getString(R.string.error_field_required));
-            valid = false;
+            isValid = false;
         } else {
             mInputName.setError(null);
         }
 
         String email = mInputEmail.getText().toString();
-        if (TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             mInputEmail.setError(getString(R.string.error_field_required));
-            valid = false;
+            isValid = false;
         } else {
             mInputEmail.setError(null);
         }
 
         String password = mInputPassword.getText().toString();
-        if (TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             mInputPassword.setError(getString(R.string.error_field_required));
-            valid = false;
+            isValid = false;
         } else {
             mInputPassword.setError(null);
         }
 
-        return valid;
+        return isValid;
     }
 }

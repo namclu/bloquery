@@ -7,10 +7,10 @@ import com.namclu.android.bloquery.R;
 
 /**
  * Created by namlu on 30-Jul-16.
- *
+ * <p>
  * BloqueryActivity.java is the default main screen of the app.
  */
-public class BloqueryActivity extends Activity{
+public class BloqueryActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -21,9 +21,9 @@ import com.namclu.android.bloquery.R;
 
 /**
  * Created by namlu on 30-Jul-16.
- *
+ * <p>
  * LoginActivity.java handles logging in a user who already has an account.
- *
+ * <p>
  * Before:
  * User provides their account Email and Password to login
  * After:
@@ -31,8 +31,8 @@ import com.namclu.android.bloquery.R;
  * Other:
  * If user doesn't have an account, they can be taken to SignUp screen
  */
-public class LoginActivity extends AppCompatActivity{
-    private static final String TAG = "LoginActivity";
+public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private static final int REQUEST_SIGNUP = 0;
 
     private EditText mInputEmail;
@@ -40,10 +40,10 @@ public class LoginActivity extends AppCompatActivity{
     private Button mLoginButton;
     private TextView mCreateAccountLink;
 
-    // Firebase declare a reference to mAuth
+    // Create reference to Firebase mAuth
     private FirebaseAuth mAuth;
 
-    // Firebase declare a reference to mAuthStateListener
+    // Create reference to mAuthStateListener
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
@@ -59,15 +59,15 @@ public class LoginActivity extends AppCompatActivity{
         mLoginButton = (Button) findViewById(R.id.button_login);
         mCreateAccountLink = (TextView) findViewById(R.id.link_create_account);
 
-        // Firebase initialize auth
+        // Initialize Firebase mAuth object
         mAuth = FirebaseAuth.getInstance();
 
         // Create AuthStateListener to respond to changes in user signin state
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
+                if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity{
 
                     // Call to destroy an activity
                     finish();
-                }else {
+                } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -116,22 +116,22 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     protected void onStop() {
         super.onStop();
-        if (mAuthStateListener != null){
+        if (mAuthStateListener != null) {
             mAuth.removeAuthStateListener(mAuthStateListener);
         }
     }
 
     // Sign in user
-    private void signIn(String email, String password){
+    private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
-        if(!validateForm()){
+        if (!validateForm()) {
             return;
         }
 
         // @Todo
         //showProgressDialog();
 
-        //
+        // Sign in user with email and password
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -141,9 +141,13 @@ public class LoginActivity extends AppCompatActivity{
                         // If sign in fails, display a message to the user.
                         // If sign in succeeds the auth state listener will be notified
                         // and logic to handle the signed in user can be handled in the listener.
-                        if (!task.isSuccessful()){
+                        if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(LoginActivity.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this,
+                                    "Welcome back " + mAuth.getCurrentUser().getEmail(),
+                                    Toast.LENGTH_SHORT).show();
                         }
 
                         // @Todo
@@ -153,34 +157,34 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     // @Todo
-    private void updateUI(FirebaseUser user){
+    private void updateUI(FirebaseUser user) {
         // @Todo
         //hideProgressDialog();
-        if (user != null){
+        if (user != null) {
 
-        }else {
+        } else {
 
         }
     }
 
     // @Todo
-    private boolean validateForm(){
+    private boolean validateForm() {
         boolean valid = true;
 
         // Validate Email, and Password
         String email = mInputEmail.getText().toString();
-        if (TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             mInputEmail.setError(getString(R.string.error_field_required));
             valid = false;
-        } else{
+        } else {
             mInputEmail.setError(null);
         }
 
         String password = mInputPassword.getText().toString();
-        if (TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             mInputPassword.setError(getString(R.string.error_field_required));
             valid = false;
-        }else {
+        } else {
             mInputPassword.setError(null);
         }
 
