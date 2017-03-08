@@ -1,6 +1,9 @@
 package com.namclu.android.bloquery.ui.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,47 +14,49 @@ import android.widget.TextView;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.model.Question;
 
+import java.util.List;
+
 /**
  * Created by namlu on 05-Mar-17.
  *
- * {@link Question} is an {@link ArrayAdapter} that can provide the layout for each list item
+ * {@link QuestionItemAdapter} is an {@link ArrayAdapter} that can provide the layout for each list item
  * based on a data source, which is a list of {@link Question} objects.
  */
 
-public class QuestionItemAdapter extends RecyclerView.Adapter<QuestionItemAdapter.QuestionItemAdapterViewHolder> {
+public class QuestionItemAdapter extends ArrayAdapter<Question> {
 
 
-    @Override
-    public QuestionItemAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View inflate = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.question_item, viewGroup, false);
-        return new QuestionItemAdapterViewHolder(inflate);
+    public QuestionItemAdapter(@NonNull Context context,
+                               @LayoutRes int resource,
+                               @NonNull List<Question> objects) {
+        super(context, resource, objects);
     }
 
+    @NonNull
     @Override
-    public void onBindViewHolder(QuestionItemAdapterViewHolder holder, int position) {
-        
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
-    // Inner class responsible for representing a single View created and returned by an Adapter
-    class QuestionItemAdapterViewHolder extends RecyclerView.ViewHolder{
-
-        // Create references to question_item.xml Views
-        TextView question;
-        TextView numberOfAnswers;
-        ImageView userProfile;
-
-        public QuestionItemAdapterViewHolder(View itemView) {
-            super(itemView);
-
-            question = (TextView) itemView.findViewById(R.id.text_question_item_question);
-            numberOfAnswers = (TextView) itemView.findViewById(R.id.text_question_item_answers);
-            userProfile = (ImageView) itemView.findViewById(R.id.image_question_item_user);
+        // Check if the existing view is being reused, otherwise inflate the view
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.query_list_item, parent, false);
         }
+
+        // Get the {@link Earthquake} object located at this position in the list
+        Question currentQuestionItem = getItem(position);
+
+        /* Question */
+        TextView questionTextView = (TextView) convertView.findViewById(R.id.text_query_question);
+        questionTextView.setText(currentQuestionItem.getQuestion());
+
+        /* Number of Answers */
+        TextView numAnswersTextView = (TextView) convertView.findViewById(R.id.text_query_num_answers);
+        numAnswersTextView.setText(currentQuestionItem.getNumberOfAnswers());
+
+        /* Profile Pic of Questioner */
+        ImageView userProfile = (ImageView) convertView.findViewById(R.id.image_query_user_profile);
+        userProfile.setImageResource(currentQuestionItem.getUserImageResId());
+
+        return convertView;
     }
 }

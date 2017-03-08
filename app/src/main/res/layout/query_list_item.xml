@@ -6,23 +6,23 @@
               android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/text_question_item_question"
+        android:id="@+id/text_query_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="What is your question?"/>
 
     <TextView
-        android:id="@+id/text_question_item_answers"
+        android:id="@+id/text_query_num_answers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_question_item_question"
+        android:layout_below="@+id/text_query_question"
         tools:text="5 answers"/>
 
     <ImageView
-        android:id="@+id/image_question_item_user"
+        android:id="@+id/image_query_user_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_question_item_question"
+        android:layout_below="@id/text_query_question"
         android:layout_alignParentRight="true"
         tools:src="@android:drawable/star_big_on"/>
 </RelativeLayout>
