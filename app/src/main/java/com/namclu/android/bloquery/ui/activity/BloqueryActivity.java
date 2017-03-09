@@ -2,12 +2,12 @@ package com.namclu.android.bloquery.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.ui.adapter.QueryItemAdapter;
-
-import java.util.ArrayList;
+import com.namclu.android.bloquery.ui.adapter.QueryAdapter;
 
 /**
  * Created by namlu on 30-Jul-16.
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 public class BloqueryActivity extends Activity {
 
     // A reference to an {@link ArrayAdapter}
-    private QueryItemAdapter mQueryItemAdapter;
+    private QueryAdapter mQueryAdapter;
 
-    // A reference to the {@link ListView} in the activity_bloquery.xml layout
-    private ListView mQueryListView;
+    // A reference to the {@link RecyclerView} in the activity_bloquery.xml layout
+    private RecyclerView mQueryRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +28,11 @@ public class BloqueryActivity extends Activity {
         setContentView(R.layout.activity_bloquery);
 
         // Initialize Views in the layout
-        mQueryListView = (ListView) findViewById(R.id.list_query);
+        mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_query);
 
-        // Create a new adapter that takes an empty list of earthquakes as input
-        mQueryItemAdapter = new QueryItemAdapter(this, R.layout.query_list_item, new ArrayList());
-
-        // Set the adapter on the {@link ListView} so the list can be populated in the user interface
-        mQueryListView.setAdapter(mQueryItemAdapter);
-
-
+        // Set the layout, animator, and adapter for recyclerView
+        mQueryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mQueryRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mQueryRecyclerView.setAdapter(mQueryAdapter);
     }
 }
