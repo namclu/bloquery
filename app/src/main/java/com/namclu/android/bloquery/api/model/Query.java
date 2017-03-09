@@ -3,45 +3,47 @@ package com.namclu.android.bloquery.api.model;
 /**
  * Created by namlu on 05-Mar-17.
  *
- * Question class represents a single question submitted by a user in Bloquery
+ * Query class represents a single query submitted by a user in Bloquery.
+ * A query consists of the query ID, question, timestamp, number of answers to the query,
+ * and a user profile image of the user who submitted the query.
  */
 
-public class Question {
+public class Query {
 
     private static final int NO_ANSWERS = 0;
     private static final int NO_IMAGE = -1;
 
     /*
-     * @param mQuestionId       The question ID assigned
-     * @param mQuestion         The question in String format
-     * @param mTimeInMills      The time (in milliseconds) of when questions was submitted
-     * @param mNumberOfAnswers  The number of answers for the question
-     * @param mUserId           The user ID associated with user account who submitted the question
+     * @param mQueryId          The assigned query ID
+     * @param mQuestion         The question being asked in the query
+     * @param mTimeStamp        The timestamp (in milliseconds) of when query was submitted
+     * @param mNumberOfAnswers  The number of answers in response to query
+     * @param mUserId           The user ID associated with user account who submitted the query
      * @param mUserImageResId   Resource ID for user image
      */
-    private int mQuestionId;
+    private int mQueryId;
     private String mQuestion;
-    private long mTimeInMills;
+    private long mTimeStamp;
     private int mNumberOfAnswers = NO_ANSWERS;
     private long mUserId;
     private int mUserImageResId = NO_IMAGE;
 
-    // Creates a new Question object
-    public Question(int questionId, String question, long timeInMills, int numberOfAnswers, long userId, int userImageResId) {
-        mQuestionId = questionId;
+    // Creates a new Query object
+    public Query(int queryId, String question, long timeStamp, int numberOfAnswers, long userId, int userImageResId) {
+        mQueryId = queryId;
         mQuestion = question;
-        mTimeInMills = timeInMills;
+        mTimeStamp = timeStamp;
         mNumberOfAnswers = numberOfAnswers;
         mUserId = userId;
         mUserImageResId = userImageResId;
     }
 
-    public int getQuestionId() {
-        return mQuestionId;
+    public int getQueryId() {
+        return mQueryId;
     }
 
-    public void setQuestionId(int questionId) {
-        mQuestionId = questionId;
+    public void setQueryId(int queryId) {
+        mQueryId = queryId;
     }
 
     public String getQuestion() {
@@ -52,12 +54,12 @@ public class Question {
         mQuestion = question;
     }
 
-    public long getTimeInMills() {
-        return mTimeInMills;
+    public long getTimeStamp() {
+        return mTimeStamp;
     }
 
-    public void setTimeInMills(long timeInMills) {
-        mTimeInMills = timeInMills;
+    public void setTimeStamp(long timeStamp) {
+        mTimeStamp = timeStamp;
     }
 
     public int getNumberOfAnswers() {

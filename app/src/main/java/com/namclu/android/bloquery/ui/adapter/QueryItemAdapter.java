@@ -12,23 +12,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.api.model.Question;
+import com.namclu.android.bloquery.api.model.Query;
 
 import java.util.List;
 
 /**
  * Created by namlu on 05-Mar-17.
  *
- * {@link QuestionItemAdapter} is an {@link ArrayAdapter} that can provide the layout for each list item
- * based on a data source, which is a list of {@link Question} objects.
+ * {@link QueryItemAdapter} is an {@link ArrayAdapter} that can provide the layout for each list item
+ * based on a data source, which is a list of {@link Query} objects.
  */
 
-public class QuestionItemAdapter extends ArrayAdapter<Question> {
+public class QueryItemAdapter extends ArrayAdapter<Query> {
 
 
-    public QuestionItemAdapter(@NonNull Context context,
-                               @LayoutRes int resource,
-                               @NonNull List<Question> objects) {
+    public QueryItemAdapter(@NonNull Context context,
+                            @LayoutRes int resource,
+                            @NonNull List<Query> objects) {
         super(context, resource, objects);
     }
 
@@ -42,20 +42,20 @@ public class QuestionItemAdapter extends ArrayAdapter<Question> {
                     R.layout.query_list_item, parent, false);
         }
 
-        // Get the {@link Earthquake} object located at this position in the list
-        Question currentQuestionItem = getItem(position);
+        // Get the {@link Query} object located at this position in the list
+        Query currentQueryItem = getItem(position);
 
         /* Question */
         TextView questionTextView = (TextView) convertView.findViewById(R.id.text_query_question);
-        questionTextView.setText(currentQuestionItem.getQuestion());
+        questionTextView.setText(currentQueryItem.getQuestion());
 
         /* Number of Answers */
         TextView numAnswersTextView = (TextView) convertView.findViewById(R.id.text_query_num_answers);
-        numAnswersTextView.setText(currentQuestionItem.getNumberOfAnswers());
+        numAnswersTextView.setText(currentQueryItem.getNumberOfAnswers());
 
-        /* Profile Pic of Questioner */
+        /* User Profile Image */
         ImageView userProfile = (ImageView) convertView.findViewById(R.id.image_query_user_profile);
-        userProfile.setImageResource(currentQuestionItem.getUserImageResId());
+        userProfile.setImageResource(currentQueryItem.getUserImageResId());
 
         return convertView;
     }
