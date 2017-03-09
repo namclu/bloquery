@@ -59,4 +59,9 @@ public class QueryItemAdapter extends ArrayAdapter<Query> {
 
         return convertView;
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 }

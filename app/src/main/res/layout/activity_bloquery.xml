@@ -4,12 +4,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/list_query"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="26sp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/hello_world"/>
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
 
 </LinearLayout>
