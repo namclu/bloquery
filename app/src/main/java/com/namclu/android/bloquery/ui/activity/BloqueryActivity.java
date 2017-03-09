@@ -16,7 +16,7 @@ import com.namclu.android.bloquery.ui.adapter.QueryAdapter;
  */
 public class BloqueryActivity extends Activity {
 
-    // A reference to an {@link ArrayAdapter}
+    // A reference to an {@link RecyclerView.Adapter}
     private QueryAdapter mQueryAdapter;
 
     // A reference to the {@link RecyclerView} in the activity_bloquery.xml layout
