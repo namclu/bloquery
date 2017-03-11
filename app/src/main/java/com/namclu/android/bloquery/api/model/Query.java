@@ -29,6 +29,12 @@ public class Query {
     private int mUserImageResId = NO_IMAGE;
 
     // Creates a new Query object
+    public Query(String question, int numberOfAnswers) {
+        mQuestion = question;
+        mNumberOfAnswers = numberOfAnswers;
+    }
+
+    // Creates a new Query object
     public Query(int queryId, String question, long timeStamp, int numberOfAnswers, long userId, int userImageResId) {
         mQueryId = queryId;
         mQuestion = question;

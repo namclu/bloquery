@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.namclu.android.bloquery.R;
+import com.namclu.android.bloquery.api.QueryDataSource;
 import com.namclu.android.bloquery.api.model.Query;
 
 /**
@@ -27,8 +28,9 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
     }
 
     @Override
-    public void onBindViewHolder(QueryAdapterViewHolder holder, int position) {
-
+    public void onBindViewHolder(QueryAdapterViewHolder queryAdapterViewHolder, int position) {
+        QueryDataSource data = new QueryDataSource();
+        queryAdapterViewHolder.update(data);
     }
 
     @Override
@@ -43,9 +45,6 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
         TextView numAnswers;
         ImageView userImage;
 
-        // Reference to Query object
-        Query mQuery;
-
         public QueryAdapterViewHolder(View itemView) {
 
             super(itemView);
@@ -55,11 +54,10 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
         }
 
         void update(Query query) {
-            mQuery = query;
 
-            question.setText(mQuery.getQuestion());
-            numAnswers.setText(mQuery.getNumberOfAnswers());
-            userImage.setImageResource(mQuery.getUserImageResId());
+            question.setText(query.getQuestion());
+            numAnswers.setText(query.getNumberOfAnswers());
+            userImage.setImageResource(query.getUserImageResId());
         }
     }
 }

@@ -27,6 +27,9 @@ public class BloqueryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bloquery);
 
+        // Initialize the adapter
+        mQueryAdapter = new QueryAdapter();
+
         // Initialize Views in the layout
         mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_query);
 
