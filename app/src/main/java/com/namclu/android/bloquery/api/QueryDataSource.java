@@ -23,4 +23,8 @@ public class QueryDataSource {
         mQueries.add(new Query("What is the square root of an orange?", 3));
         mQueries.add(new Query("What is the square root of a root?", 17));
     }
+
+    public List<Query> getQueries() {
+        return mQueries;
+    }
 }

@@ -8,8 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.api.QueryDataSource;
 import com.namclu.android.bloquery.api.model.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by namlu on 05-Mar-17.
@@ -20,6 +22,16 @@ import com.namclu.android.bloquery.api.model.Query;
 
 public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapterViewHolder> {
 
+    List<Query> mQueries;
+
+    public QueryAdapter() {
+        mQueries = new ArrayList<>();
+    }
+
+    public void addQuery(Query query) {
+        mQueries.add(query);
+        notifyDataSetChanged();
+    }
 
     @Override
     public QueryAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,13 +41,12 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
 
     @Override
     public void onBindViewHolder(QueryAdapterViewHolder queryAdapterViewHolder, int position) {
-        QueryDataSource data = new QueryDataSource();
-        queryAdapterViewHolder.update(data);
+        queryAdapterViewHolder.update(mQueries.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mQueries.size();
     }
 
     class QueryAdapterViewHolder extends RecyclerView.ViewHolder {
@@ -56,7 +67,7 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
         void update(Query query) {
 
             question.setText(query.getQuestion());
-            numAnswers.setText(query.getNumberOfAnswers());
+            numAnswers.setText("" + query.getNumberOfAnswers());
             userImage.setImageResource(query.getUserImageResId());
         }
     }
