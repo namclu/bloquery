@@ -65,11 +65,14 @@ public class BloqueryActivity extends Activity implements ChildEventListener{
         mQuestionsReference.addChildEventListener(this);
     }
 
-    /* Firebase: Required methods of ChildEventListener */
+    /*
+     * Firebase: Required methods of ChildEventListener
+     */
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
         Query query = dataSnapshot.getValue(Query.class);
         mQueryAdapter.addQuery(query);
+
     }
 
     @Override

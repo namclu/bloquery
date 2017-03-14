@@ -68,7 +68,7 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
 
             question.setText(query.getQuestion());
             numAnswers.setText("" + query.getNumberOfAnswers());
-            userImage.setImageResource(query.getUserImageResId());
+            // userImage.setImageResource(query.getUserImageResId());
         }
     }
 }
