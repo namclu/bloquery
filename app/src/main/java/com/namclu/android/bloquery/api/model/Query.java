@@ -29,11 +29,20 @@ public class Query {
     private int mUserImageResId = NO_IMAGE;
 
     // Creates a no-argument Query object
-    public Query() {}
+    public Query() {
+        // Default constructor required for calls to DataSnapshot.getValue(Query.class)
+    }
 
     // Creates a new Query object
-    public Query(String question, int numberOfAnswers) {
+    /*public Query(String question, int numberOfAnswers) {
         mQuestion = question;
+        mNumberOfAnswers = numberOfAnswers;
+    }*/
+
+    // Creates a new Query object
+    public Query(String question, long timeStamp, int numberOfAnswers) {
+        mQuestion = question;
+        mTimeStamp = timeStamp;
         mNumberOfAnswers = numberOfAnswers;
     }
 

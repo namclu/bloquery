@@ -49,10 +49,18 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
         return mQueries.size();
     }
 
+    // Method to clear out previous data in RecyclerView
+    public void clear() {
+        int size = mQueries.size();
+        mQueries.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
     class QueryAdapterViewHolder extends RecyclerView.ViewHolder {
 
         // Reference to Query items
         TextView question;
+        TextView timeStamp;
         TextView numAnswers;
         ImageView userImage;
 
@@ -60,6 +68,7 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
 
             super(itemView);
             question = (TextView) itemView.findViewById(R.id.text_query_question);
+            timeStamp = (TextView) itemView.findViewById(R.id.text_query_time_stamp);
             numAnswers = (TextView) itemView.findViewById(R.id.text_query_num_answers);
             userImage = (ImageView) itemView.findViewById(R.id.image_query_user_image);
         }
@@ -67,7 +76,8 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
         void update(Query query) {
 
             question.setText(query.getQuestion());
-            numAnswers.setText("" + query.getNumberOfAnswers());
+            timeStamp.setText("Timestamp: " + query.getTimeStamp());
+            numAnswers.setText("# of answers: " + query.getNumberOfAnswers());
             // userImage.setImageResource(query.getUserImageResId());
         }
     }

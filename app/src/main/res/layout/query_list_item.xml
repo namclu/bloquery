@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight">
 
     <TextView
         android:id="@+id/text_query_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="What is your question?"/>
+
+    <TextView
+        android:id="@+id/text_query_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        tools:text="Submitted: 1 Jan 2015"/>
 
     <TextView
         android:id="@+id/text_query_num_answers"

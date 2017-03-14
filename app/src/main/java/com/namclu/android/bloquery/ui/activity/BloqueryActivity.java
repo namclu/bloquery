@@ -65,6 +65,14 @@ public class BloqueryActivity extends Activity implements ChildEventListener{
         mQuestionsReference.addChildEventListener(this);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // call to clear previous data from adapter when restarting
+        mQueryAdapter.clear();
+    }
+
     /*
      * Firebase: Required methods of ChildEventListener
      */
@@ -72,7 +80,6 @@ public class BloqueryActivity extends Activity implements ChildEventListener{
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
         Query query = dataSnapshot.getValue(Query.class);
         mQueryAdapter.addQuery(query);
-
     }
 
     @Override
