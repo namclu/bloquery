@@ -21,7 +21,7 @@ public class Query {
      * @param mUserId           The user ID associated with user account who submitted the query
      * @param mUserImageResId   Resource ID for user image
      */
-    private int mQueryId;
+    private String mQueryId;
     private String mQuestion;
     private long mTimeStamp;
     private int mNumberOfAnswers = NO_ANSWERS;
@@ -47,7 +47,7 @@ public class Query {
     }
 
     // Creates a new Query object
-    public Query(int queryId, String question, long timeStamp, int numberOfAnswers, long userId, int userImageResId) {
+    public Query(String queryId, String question, long timeStamp, int numberOfAnswers, long userId, int userImageResId) {
         mQueryId = queryId;
         mQuestion = question;
         mTimeStamp = timeStamp;
@@ -56,11 +56,11 @@ public class Query {
         mUserImageResId = userImageResId;
     }
 
-    public int getQueryId() {
+    public String getQueryId() {
         return mQueryId;
     }
 
-    public void setQueryId(int queryId) {
+    public void setQueryId(String queryId) {
         mQueryId = queryId;
     }
 

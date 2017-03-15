@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
+import com.namclu.android.bloquery.api.QueryDataSource;
 import com.namclu.android.bloquery.api.model.Query;
 import com.namclu.android.bloquery.ui.adapter.QueryAdapter;
 
@@ -56,6 +57,9 @@ public class BloqueryActivity extends Activity implements ChildEventListener{
         // Firebase: initialize references
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mQuestionsReference = mDatabaseReference.child(QUESTIONS);
+
+        // Use QueryDataSource.writeNewQuery() to add Query to Firebase
+        QueryDataSource dataSource = new QueryDataSource();
     }
 
     @Override
