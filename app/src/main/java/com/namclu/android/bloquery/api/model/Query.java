@@ -34,10 +34,10 @@ public class Query {
     }
 
     // Creates a new Query object
-    /*public Query(String question, int numberOfAnswers) {
+    public Query(String question, int numberOfAnswers) {
         mQuestion = question;
         mNumberOfAnswers = numberOfAnswers;
-    }*/
+    }
 
     // Creates a new Query object
     public Query(String question, long timeStamp, int numberOfAnswers) {

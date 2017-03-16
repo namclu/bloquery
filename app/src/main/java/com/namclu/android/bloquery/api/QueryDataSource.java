@@ -43,13 +43,7 @@ public class QueryDataSource {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mQuestionsReference = mDatabaseReference.child(QUESTIONS);
 
-        // Calling getKey() on a push() reference returns the value of the auto-generated key.
-        String key = mDatabaseReference.child(QUESTIONS).push().getKey();
         Query query = new Query(question, timeStamp, numberOfAnswers);
-
-        mQuestionsReference.setValue(key);
-        mQuestionsReference.child(key).child("question").setValue(query.getQuestion());
-        mQuestionsReference.child(key).child("timeStamp").setValue(query.getTimeStamp());
-        mQuestionsReference.child(key).child("numberOfAnswers").setValue(query.getNumberOfAnswers());
+        mQuestionsReference.push().setValue(query);
     }
 }
