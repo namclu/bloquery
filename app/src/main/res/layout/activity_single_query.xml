@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.namclu.android.bloquery.ui.activity.SingleQueryActivity">
+
+    <TextView
+        android:id="@+id/text_single_query_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="What is your question?"/>
+
+    <TextView
+        android:id="@+id/text_single_query_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Submitted: 1 Jan 2015"/>
+
+    <TextView
+        android:id="@+id/text_single_query_num_answers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="5 answers"/>
+
+    <ImageView
+        android:id="@+id/image_single_query_user_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@android:drawable/star_big_on"/>
+</LinearLayout>

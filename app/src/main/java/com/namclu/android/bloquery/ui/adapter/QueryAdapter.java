@@ -24,9 +24,10 @@ import java.util.List;
 public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapterViewHolder> {
 
     public static interface QueryAdapterDelegate {
-        public void onItemClicked(QueryAdapter queryAdapter);
+        public void onItemClicked(int position, List<Query> queries);
     }
 
+    /* private fields */
     List<Query> mQueries;
 
     // References to delegate objects
@@ -49,7 +50,7 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
 
     @Override
     public void onBindViewHolder(QueryAdapterViewHolder queryAdapterViewHolder, int position) {
-        queryAdapterViewHolder.update(mQueries.get(position));
+        queryAdapterViewHolder.update(position, mQueries.get(position));
     }
 
     @Override
@@ -86,6 +87,8 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
         TextView numAnswers;
         ImageView userImage;
 
+        int position;
+
         public QueryAdapterViewHolder(View itemView) {
 
             super(itemView);
@@ -97,19 +100,21 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
             itemView.setOnClickListener(this);
         }
 
-        void update(Query query) {
+        void update(int position, Query query) {
+
+            this.position = position;
 
             question.setText(query.getQuestion());
             timeStamp.setText("Timestamp: " + query.getTimeStamp());
             numAnswers.setText("# of answers: " + query.getNumberOfAnswers());
-            // userImage.setImageResource(query.getUserImageResId());
+            userImage.setImageResource(query.getUserImageResId());
         }
 
         // Only method of View.OnClickListener
         @Override
         public void onClick(View view) {
             if (getQueryAdapterDelegate() != null) {
-                getQueryAdapterDelegate().onItemClicked(QueryAdapter.this);
+                getQueryAdapterDelegate().onItemClicked(position, mQueries);
             }
         }
 

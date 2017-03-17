@@ -17,6 +17,8 @@ import com.namclu.android.bloquery.api.QueryDataSource;
 import com.namclu.android.bloquery.api.model.Query;
 import com.namclu.android.bloquery.ui.adapter.QueryAdapter;
 
+import java.util.List;
+
 /**
  * Created by namlu on 30-Jul-16.
  * <p>
@@ -27,10 +29,12 @@ public class BloqueryActivity extends Activity
         ChildEventListener,
         QueryAdapter.QueryAdapterDelegate {
 
+    /* Constants */
     public static final String TAG = "BloqueryActivity";
     public static final String QUESTIONS = "questions";
     public static final String EXTRA_MESSAGE = "com.namclu.MESSAGE";
 
+    /* private fields */
     // A reference to an {@link RecyclerView.Adapter}
     private QueryAdapter mQueryAdapter;
 
@@ -117,8 +121,13 @@ public class BloqueryActivity extends Activity
      * Method from implementing QueryAdapter.QueryAdapterDelegate
      */
     @Override
-    public void onItemClicked(QueryAdapter queryAdapter) {
-        Intent intent = new Intent(this, SingleQueryView.class);
+    public void onItemClicked(int position, List<Query> queries) {
+
+        // The current Query item
+        Query queryItem = queries.get(position);
+
+        Intent intent = new Intent(this, SingleQueryActivity.class);
+
         startActivity(intent);
     }
 }

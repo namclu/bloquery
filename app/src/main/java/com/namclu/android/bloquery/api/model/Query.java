@@ -40,7 +40,8 @@ public class Query {
     }
 
     // Creates a new Query object
-    public Query(String question, long timeStamp, int numberOfAnswers) {
+    public Query(String queryId, String question, long timeStamp, int numberOfAnswers) {
+        mQueryId = queryId;
         mQuestion = question;
         mTimeStamp = timeStamp;
         mNumberOfAnswers = numberOfAnswers;
