@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme">
 
         <!-- Signup Activity -->
-        <activity android:name=".ui.activity.SignUpActivity"
+        <activity
+            android:name=".ui.activity.SignUpActivity"
             android:label="@string/title_activity_signup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -34,6 +35,8 @@
         <activity
             android:name=".ui.activity.BloqueryActivity"
             android:label="@string/title_activity_bloquery">
+        </activity>
+        <activity android:name=".ui.activity.SingleQueryView">
         </activity>
     </application>
 

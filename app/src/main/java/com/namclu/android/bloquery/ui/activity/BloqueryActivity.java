@@ -1,6 +1,7 @@
 package com.namclu.android.bloquery.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,10 +22,14 @@ import com.namclu.android.bloquery.ui.adapter.QueryAdapter;
  * <p>
  * BloqueryActivity.java is the default main screen of the app.
  */
-public class BloqueryActivity extends Activity implements ChildEventListener{
+public class BloqueryActivity extends Activity
+        implements
+        ChildEventListener,
+        QueryAdapter.QueryAdapterDelegate {
 
     public static final String TAG = "BloqueryActivity";
     public static final String QUESTIONS = "questions";
+    public static final String EXTRA_MESSAGE = "com.namclu.MESSAGE";
 
     // A reference to an {@link RecyclerView.Adapter}
     private QueryAdapter mQueryAdapter;
@@ -45,6 +50,8 @@ public class BloqueryActivity extends Activity implements ChildEventListener{
 
         // Initialize the adapter
         mQueryAdapter = new QueryAdapter();
+        // Set BloqueryActivity(this) as QueryAdapter's delegate
+        mQueryAdapter.setQueryAdapterDelegate(this);
 
         // Initialize Views in the layout
         mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_query);
@@ -104,5 +111,14 @@ public class BloqueryActivity extends Activity implements ChildEventListener{
     @Override
     public void onCancelled(DatabaseError databaseError) {
 
+    }
+
+    /*
+     * Method from implementing QueryAdapter.QueryAdapterDelegate
+     */
+    @Override
+    public void onItemClicked(QueryAdapter queryAdapter) {
+        Intent intent = new Intent(this, SingleQueryView.class);
+        startActivity(intent);
     }
 }

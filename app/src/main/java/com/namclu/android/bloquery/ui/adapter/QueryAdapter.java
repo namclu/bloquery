@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.model.Query;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,14 @@ import java.util.List;
 
 public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapterViewHolder> {
 
+    public static interface QueryAdapterDelegate {
+        public void onItemClicked(QueryAdapter queryAdapter);
+    }
+
     List<Query> mQueries;
+
+    // References to delegate objects
+    private WeakReference<QueryAdapterDelegate> mDelegate;
 
     public QueryAdapter() {
         mQueries = new ArrayList<>();
@@ -56,7 +64,21 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
         notifyItemRangeRemoved(0, size);
     }
 
-    class QueryAdapterViewHolder extends RecyclerView.ViewHolder {
+    /*
+     * Getters and setter methods
+     */
+    public QueryAdapterDelegate getQueryAdapterDelegate() {
+        if (mDelegate == null) {
+            return null;
+        }
+        return mDelegate.get();
+    }
+
+    public void setQueryAdapterDelegate(QueryAdapterDelegate delegate) {
+        mDelegate = new WeakReference<QueryAdapterDelegate>(delegate);
+    }
+
+    class QueryAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Reference to Query items
         TextView question;
@@ -71,6 +93,8 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
             timeStamp = (TextView) itemView.findViewById(R.id.text_query_time_stamp);
             numAnswers = (TextView) itemView.findViewById(R.id.text_query_num_answers);
             userImage = (ImageView) itemView.findViewById(R.id.image_query_user_image);
+
+            itemView.setOnClickListener(this);
         }
 
         void update(Query query) {
@@ -80,5 +104,14 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.QueryAdapter
             numAnswers.setText("# of answers: " + query.getNumberOfAnswers());
             // userImage.setImageResource(query.getUserImageResId());
         }
+
+        // Only method of View.OnClickListener
+        @Override
+        public void onClick(View view) {
+            if (getQueryAdapterDelegate() != null) {
+                getQueryAdapterDelegate().onItemClicked(QueryAdapter.this);
+            }
+        }
+
     }
 }
