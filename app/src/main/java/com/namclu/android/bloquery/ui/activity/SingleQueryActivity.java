@@ -33,6 +33,8 @@ public class SingleQueryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_query);
 
+        String id = getIntent().getStringExtra("ID");
+
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mQuestionsReference = mDatabaseReference.child(QUESTIONS);
 
@@ -41,6 +43,8 @@ public class SingleQueryActivity extends AppCompatActivity {
         numAnswers = (TextView) findViewById(R.id.text_single_query_num_answers);
         userImage = (ImageView) findViewById(R.id.image_single_query_user_image);
 
-        question.setText();
+        question.setText("ID is: " + id
+            + "\nNow you need to load the Query for this ID from Firebase."
+            + "\nAlternatively, you can use Parceleable. Let me know what you think.");
     }
 }

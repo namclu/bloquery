@@ -125,8 +125,10 @@ public class BloqueryActivity extends Activity
 
         // The current Query item
         Query queryItem = queries.get(position);
+        String id = queryItem.getQueryId();
 
         Intent intent = new Intent(this, SingleQueryActivity.class);
+        intent.putExtra("ID", id);
 
         startActivity(intent);
     }
