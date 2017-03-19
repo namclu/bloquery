@@ -5,15 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.namclu.android.bloquery.R;
+import com.namclu.android.bloquery.api.model.Query;
 
 public class SingleQueryActivity extends AppCompatActivity {
 
     /* Constants */
     public static final String TAG = "SingleQueryActivity";
-    public static final String QUESTIONS = "questions";
 
     /* private fields */
     private DatabaseReference mDatabaseReference;
@@ -33,18 +36,29 @@ public class SingleQueryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_query);
 
+        // Get the intent data from BloqueryActivity
         String id = getIntent().getStringExtra("ID");
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mQuestionsReference = mDatabaseReference.child(QUESTIONS);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("questions/" + id);
 
         question = (TextView) findViewById(R.id.text_single_query_question);
         timeStamp = (TextView) findViewById(R.id.text_single_query_time_stamp);
         numAnswers = (TextView) findViewById(R.id.text_single_query_num_answers);
         userImage = (ImageView) findViewById(R.id.image_single_query_user_image);
 
-        question.setText("ID is: " + id
-            + "\nNow you need to load the Query for this ID from Firebase."
-            + "\nAlternatively, you can use Parceleable. Let me know what you think.");
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                question.setText(dataSnapshot.getValue(Query.class).getQuestion());
+                timeStamp.setText("" + dataSnapshot.getValue(Query.class).getTimeStamp());
+                numAnswers.setText("" + dataSnapshot.getValue(Query.class).getNumberOfAnswers());
+                //userImage.setImageResource(dataSnapshot.getValue(Query.class).getUserImageResId());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
