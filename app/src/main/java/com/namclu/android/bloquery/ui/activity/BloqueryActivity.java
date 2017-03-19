@@ -13,9 +13,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.api.QueryDataSource;
-import com.namclu.android.bloquery.api.model.Query;
-import com.namclu.android.bloquery.ui.adapter.QueryAdapter;
+import com.namclu.android.bloquery.api.QuestionDataSource;
+import com.namclu.android.bloquery.api.model.Question;
+import com.namclu.android.bloquery.ui.adapter.QuestionAdapter;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class BloqueryActivity extends Activity
         implements
         ChildEventListener,
-        QueryAdapter.QueryAdapterDelegate {
+        QuestionAdapter.QuestionAdapterDelegate {
 
     /* Constants */
     public static final String TAG = "BloqueryActivity";
@@ -36,7 +36,7 @@ public class BloqueryActivity extends Activity
 
     /* private fields */
     // A reference to an {@link RecyclerView.Adapter}
-    private QueryAdapter mQueryAdapter;
+    private QuestionAdapter mQuestionAdapter;
 
     // A reference to the {@link RecyclerView} in the activity_bloquery.xml layout
     private RecyclerView mQueryRecyclerView;
@@ -53,24 +53,24 @@ public class BloqueryActivity extends Activity
         setContentView(R.layout.activity_bloquery);
 
         // Initialize the adapter
-        mQueryAdapter = new QueryAdapter();
-        // Set BloqueryActivity(this) as QueryAdapter's delegate
-        mQueryAdapter.setQueryAdapterDelegate(this);
+        mQuestionAdapter = new QuestionAdapter();
+        // Set BloqueryActivity(this) as QuestionAdapter's delegate
+        mQuestionAdapter.setQuestionAdapterDelegate(this);
 
         // Initialize Views in the layout
-        mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_query);
+        mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_question);
 
         // Set the layout, animator, and adapter for recyclerView
         mQueryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mQueryRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mQueryRecyclerView.setAdapter(mQueryAdapter);
+        mQueryRecyclerView.setAdapter(mQuestionAdapter);
 
         // Firebase: initialize references
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mQuestionsReference = mDatabaseReference.child(QUESTIONS);
 
-        // Use QueryDataSource.writeNewQuery() to add Query to Firebase
-        QueryDataSource dataSource = new QueryDataSource();
+        // Use QuestionDataSource.writeNewQuestion() to add Question to Firebase
+        QuestionDataSource dataSource = new QuestionDataSource();
     }
 
     @Override
@@ -85,7 +85,7 @@ public class BloqueryActivity extends Activity
         super.onRestart();
 
         // call to clear previous data from adapter when restarting
-        mQueryAdapter.clear();
+        mQuestionAdapter.clear();
     }
 
     /*
@@ -93,8 +93,8 @@ public class BloqueryActivity extends Activity
      */
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-        Query query = dataSnapshot.getValue(Query.class);
-        mQueryAdapter.addQuery(query);
+        Question question = dataSnapshot.getValue(Question.class);
+        mQuestionAdapter.addQuestion(question);
     }
 
     @Override
@@ -118,16 +118,16 @@ public class BloqueryActivity extends Activity
     }
 
     /*
-     * Method from implementing QueryAdapter.QueryAdapterDelegate
+     * Method from implementing QuestionAdapter.QuestionAdapterDelegate
      */
     @Override
-    public void onItemClicked(int position, List<Query> queries) {
+    public void onItemClicked(int position, List<Question> questions) {
 
-        // The current Query item
-        Query queryItem = queries.get(position);
-        String id = queryItem.getQueryId();
+        // The current Question item
+        Question questionItem = questions.get(position);
+        String id = questionItem.getQuestionId();
 
-        Intent intent = new Intent(this, SingleQueryActivity.class);
+        Intent intent = new Intent(this, SingleQuestionActivity.class);
         intent.putExtra("ID", id);
 
         startActivity(intent);

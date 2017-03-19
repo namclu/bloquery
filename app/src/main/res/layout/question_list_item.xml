@@ -6,30 +6,30 @@
                 android:layout_height="?android:attr/listPreferredItemHeight">
 
     <TextView
-        android:id="@+id/text_query_question"
+        android:id="@+id/text_question_string"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="What is your question?"/>
+        tools:text="What is your questionString?"/>
 
     <TextView
-        android:id="@+id/text_query_time_stamp"
+        android:id="@+id/text_question_time_stamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         tools:text="Submitted: 1 Jan 2015"/>
 
     <TextView
-        android:id="@+id/text_query_num_answers"
+        android:id="@+id/text_question_num_answers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_query_question"
+        android:layout_below="@+id/text_question_string"
         tools:text="5 answers"/>
 
     <ImageView
-        android:id="@+id/image_query_user_image"
+        android:id="@+id/image_question_user_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_query_question"
+        android:layout_below="@id/text_question_string"
         android:layout_alignParentRight="true"
         tools:src="@android:drawable/star_big_on"/>
 </RelativeLayout>

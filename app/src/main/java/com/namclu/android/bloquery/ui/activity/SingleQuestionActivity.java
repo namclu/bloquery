@@ -11,18 +11,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.api.model.Query;
+import com.namclu.android.bloquery.api.model.Question;
 
-public class SingleQueryActivity extends AppCompatActivity {
+public class SingleQuestionActivity extends AppCompatActivity {
 
     /* Constants */
-    public static final String TAG = "SingleQueryActivity";
+    public static final String TAG = "SingleQuestionActivity";
 
     /* private fields */
     private DatabaseReference mDatabaseReference;
     private DatabaseReference mQuestionsReference;
 
-    private TextView question;
+    private TextView questionString;
     private TextView timeStamp;
     private TextView numAnswers;
     private ImageView userImage;
@@ -34,25 +34,25 @@ public class SingleQueryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_query);
+        setContentView(R.layout.activity_single_question);
 
         // Get the intent data from BloqueryActivity
         String id = getIntent().getStringExtra("ID");
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("questions/" + id);
 
-        question = (TextView) findViewById(R.id.text_single_query_question);
-        timeStamp = (TextView) findViewById(R.id.text_single_query_time_stamp);
-        numAnswers = (TextView) findViewById(R.id.text_single_query_num_answers);
-        userImage = (ImageView) findViewById(R.id.image_single_query_user_image);
+        questionString = (TextView) findViewById(R.id.text_single_question_string);
+        timeStamp = (TextView) findViewById(R.id.text_single_question_time_stamp);
+        numAnswers = (TextView) findViewById(R.id.text_single_question_num_answers);
+        userImage = (ImageView) findViewById(R.id.image_single_question_user_image);
 
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                question.setText(dataSnapshot.getValue(Query.class).getQuestion());
-                timeStamp.setText("" + dataSnapshot.getValue(Query.class).getTimeStamp());
-                numAnswers.setText("" + dataSnapshot.getValue(Query.class).getNumberOfAnswers());
-                //userImage.setImageResource(dataSnapshot.getValue(Query.class).getUserImageResId());
+                questionString.setText(dataSnapshot.getValue(Question.class).getQuestionString());
+                timeStamp.setText("" + dataSnapshot.getValue(Question.class).getTimeStamp());
+                numAnswers.setText("" + dataSnapshot.getValue(Question.class).getNumberOfAnswers());
+                //userImage.setImageResource(dataSnapshot.getValue(Question.class).getUserImageResId());
             }
 
             @Override
