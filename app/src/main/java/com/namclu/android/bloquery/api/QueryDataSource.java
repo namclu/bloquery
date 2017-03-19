@@ -26,14 +26,6 @@ public class QueryDataSource {
 
     public QueryDataSource() {
         mQueries = new ArrayList<>();
-
-        writeNewQuery("What is...?", 11, 7);
-        writeNewQuery("How to ask...?", 9, 34);
-
-        // Add elements to Query ArrayList
-        /*mQueries.add(new Query("What is the square root of a pickle?", 7));
-        mQueries.add(new Query("What is the square root of an orange?", 3));
-        mQueries.add(new Query("What is the square root of a root?", 17));*/
     }
 
     public List<Query> getQueries() {
