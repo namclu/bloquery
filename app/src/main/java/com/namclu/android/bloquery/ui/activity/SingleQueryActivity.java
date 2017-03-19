@@ -33,6 +33,9 @@ public class SingleQueryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_query);
 
+        // Get the intent data from BloqueryActivity
+        String id = getIntent().getStringExtra("ID");
+
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mQuestionsReference = mDatabaseReference.child(QUESTIONS);
 

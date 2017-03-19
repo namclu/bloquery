@@ -27,8 +27,8 @@ public class QueryDataSource {
     public QueryDataSource() {
         mQueries = new ArrayList<>();
 
-        writeNewQuery(null, "What is...?", 11, 7);
-        writeNewQuery(null, "How to ask...?", 9, 34);
+        writeNewQuery("What is...?", 11, 7);
+        writeNewQuery("How to ask...?", 9, 34);
 
         // Add elements to Query ArrayList
         /*mQueries.add(new Query("What is the square root of a pickle?", 7));
@@ -41,12 +41,12 @@ public class QueryDataSource {
     }
 
     // Method to write a new query into database
-    private void writeNewQuery(String queryId, String question, int timeStamp, int numberOfAnswers) {
+    private void writeNewQuery(String question, int timeStamp, int numberOfAnswers) {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mQuestionsReference = mDatabaseReference.child(QUESTIONS);
 
         String key = mDatabaseReference.push().getKey();
         Query query = new Query(key, question, timeStamp, numberOfAnswers);
-        mQuestionsReference.push().setValue(query);
+        mQuestionsReference.child(key).setValue(query);
     }
 }
