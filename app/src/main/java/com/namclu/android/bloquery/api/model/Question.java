@@ -1,11 +1,12 @@
 package com.namclu.android.bloquery.api.model;
 
+import java.util.List;
+
 /**
  * Created by namlu on 05-Mar-17.
  *
- * Question class represents a single question object submitted by a user in Bloquery.
- * A Question object consists of the question ID, question, timestamp, number of answers to the
- * question, and a user profile image of the user who submitted the question.
+ * Question class represents a single Question object submitted by a user in Bloquery.
+ *
  */
 
 public class Question {
@@ -17,6 +18,7 @@ public class Question {
      * @param mQuestionId       The assigned question ID
      * @param mQuestionString   The question string being asked in the question object
      * @param mTimeStamp        The timestamp (in milliseconds) of when question was submitted
+     * @param mAnswers          A list of Answers associated with the current question
      * @param mNumberOfAnswers  The number of answers in response to question
      * @param mUserId           The user ID associated with user account who submitted the question
      * @param mUserImageResId   Resource ID for user image
@@ -24,6 +26,7 @@ public class Question {
     private String mQuestionId;
     private String mQuestionString;
     private long mTimeStamp;
+    private List<Answer> mAnswers;
     private int mNumberOfAnswers = NO_ANSWERS;
     private long mUserId;
     private int mUserImageResId = NO_IMAGE;
@@ -79,6 +82,14 @@ public class Question {
 
     public void setTimeStamp(long timeStamp) {
         mTimeStamp = timeStamp;
+    }
+
+    public List<Answer> getAnswers() {
+        return mAnswers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        mAnswers = answers;
     }
 
     public int getNumberOfAnswers() {

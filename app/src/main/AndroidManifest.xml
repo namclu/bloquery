@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Signup Activity -->
+        <!-- Sign Up Activity -->
         <activity
             android:name=".ui.activity.SignUpActivity"
             android:label="@string/title_activity_signup">
@@ -31,12 +31,16 @@
             android:label="@string/title_activity_login">
         </activity>
 
-        <!-- BloQuery Activity -->
+        <!-- Bloquery Activity -->
         <activity
             android:name=".ui.activity.BloqueryActivity"
             android:label="@string/title_activity_bloquery">
         </activity>
-        <activity android:name=".ui.activity.SingleQuestionActivity">
+
+        <!-- Single Question Activity -->
+        <activity android:name=".ui.activity.SingleQuestionActivity"
+                  android:parentActivityName=".ui.activity.BloqueryActivity"
+                  android:label="Single Question">
         </activity>
     </application>
 
