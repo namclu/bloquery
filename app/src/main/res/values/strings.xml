@@ -3,6 +3,7 @@
     <string name="title_activity_signup">Sign Up</string>
     <string name="title_activity_login">Log In</string>
     <string name="title_activity_bloquery">Bloquery</string>
+    <string name="title_activity_submit">Submit Answer</string>
 
     <!-- General strings -->
     <string name="prompt_name">Name</string>
@@ -29,5 +30,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- ActionBar strings -->
+    <string name="menu_answer">Add an answer</string>
 
 </resources>

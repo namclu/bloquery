@@ -1,7 +1,10 @@
 package com.namclu.android.bloquery.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -60,5 +63,22 @@ public class SingleQuestionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.single_question, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() ==  R.id.action_answer) {
+            Intent answerIntent = new Intent(this, SubmitAnswerActivity.class);
+
+            startActivity(answerIntent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

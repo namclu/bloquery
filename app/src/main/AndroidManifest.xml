@@ -38,9 +38,15 @@
         </activity>
 
         <!-- Single Question Activity -->
-        <activity android:name=".ui.activity.SingleQuestionActivity"
-                  android:parentActivityName=".ui.activity.BloqueryActivity"
-                  android:label="Single Question">
+        <activity
+            android:name=".ui.activity.SingleQuestionActivity"
+            android:label="Single Question"
+            android:parentActivityName=".ui.activity.BloqueryActivity">
+        </activity>
+        <activity
+            android:name=".ui.activity.SubmitAnswerActivity"
+            android:label="@string/title_activity_submit"
+            android:parentActivityName=".ui.activity.SingleQuestionActivity">
         </activity>
     </application>
 
