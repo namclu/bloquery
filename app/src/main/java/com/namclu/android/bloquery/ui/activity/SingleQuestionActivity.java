@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,10 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.AnswerDataSource;
+import com.namclu.android.bloquery.api.model.Answer;
 import com.namclu.android.bloquery.api.model.Question;
 import com.namclu.android.bloquery.ui.adapter.AnswerAdapter;
 
-public class SingleQuestionActivity extends AppCompatActivity {
+public class SingleQuestionActivity extends AppCompatActivity implements ChildEventListener{
 
     /* Constants */
     public static final String TAG = "SingleQuestionActivity";
@@ -60,8 +62,8 @@ public class SingleQuestionActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 questionString.setText(dataSnapshot.getValue(Question.class).getQuestionString());
-                timeStamp.setText("" + dataSnapshot.getValue(Question.class).getTimeStamp());
-                numAnswers.setText("" + dataSnapshot.getValue(Question.class).getNumberOfAnswers());
+                timeStamp.setText("Timestamp: " + dataSnapshot.getValue(Question.class).getTimeStamp());
+                numAnswers.setText("# of answers: " + dataSnapshot.getValue(Question.class).getNumberOfAnswers());
                 //userImage.setImageResource(dataSnapshot.getValue(Question.class).getUserImageResId());
             }
 
@@ -81,6 +83,14 @@ public class SingleQuestionActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // call to clear previous data from adapter when restarting
+        mAnswerAdapter.clear();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.single_question, menu);
         return super.onCreateOptionsMenu(menu);
@@ -97,5 +107,34 @@ public class SingleQuestionActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /*
+     * Firebase: Required methods of ChildEventListener
+     */
+    @Override
+    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        Answer answer = dataSnapshot.getValue(Answer.class);
+        mAnswerAdapter.addAnswer(answer);
+    }
+
+    @Override
+    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+    }
+
+    @Override
+    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+    }
+
+    @Override
+    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+
     }
 }

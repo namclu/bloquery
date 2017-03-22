@@ -27,6 +27,11 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdap
         mAnswers = new ArrayList<>();
     }
 
+    public void addAnswer(Answer answer) {
+        mAnswers.add(answer);
+        notifyDataSetChanged();
+    }
+
     @Override
     public AnswerAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(
@@ -41,7 +46,14 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdap
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mAnswers.size();
+    }
+
+    // Method to clear out previous data in RecyclerView
+    public void clear() {
+        int size = mAnswers.size();
+        mAnswers.clear();
+        notifyItemRangeRemoved(0, size);
     }
 
     class AnswerAdapterViewHolder extends RecyclerView.ViewHolder {
