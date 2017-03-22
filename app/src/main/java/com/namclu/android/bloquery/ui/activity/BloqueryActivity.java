@@ -32,7 +32,6 @@ public class BloqueryActivity extends Activity
     /* Constants */
     public static final String TAG = "BloqueryActivity";
     public static final String QUESTIONS = "questions";
-    public static final String EXTRA_MESSAGE = "com.namclu.MESSAGE";
 
     /* private fields */
     // A reference to an {@link RecyclerView.Adapter}
@@ -125,10 +124,10 @@ public class BloqueryActivity extends Activity
 
         // The current Question item
         Question questionItem = questions.get(position);
-        String id = questionItem.getQuestionId();
+        String questionId = questionItem.getQuestionId();
 
         Intent intent = new Intent(this, SingleQuestionActivity.class);
-        intent.putExtra("ID", id);
+        intent.putExtra("question_id", questionId);
 
         startActivity(intent);
     }

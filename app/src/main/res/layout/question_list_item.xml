@@ -12,14 +12,7 @@
         tools:text="What is your questionString?"/>
 
     <TextView
-        android:id="@+id/text_question_time_stamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        tools:text="Submitted: 1 Jan 2015"/>
-
-    <TextView
-        android:id="@+id/text_question_num_answers"
+        android:id="@+id/text_question_number_of_answers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_question_string"
@@ -32,4 +25,18 @@
         android:layout_below="@id/text_question_string"
         android:layout_alignParentRight="true"
         tools:src="@android:drawable/star_big_on"/>
+
+    <TextView
+        android:id="@+id/text_question_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_question_user_image"
+        android:layout_alignParentRight="true"
+        tools:text="Submitted: 1 Jan 2015"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/text_question_time_stamp"
+        android:background="@android:color/darker_gray"/>
 </RelativeLayout>

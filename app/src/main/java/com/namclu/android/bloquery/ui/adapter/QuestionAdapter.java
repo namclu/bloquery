@@ -28,7 +28,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     }
 
     /* private fields */
-    List<Question> mQuestions;
+    private List<Question> mQuestions;
 
     // References to delegate objects
     private WeakReference<QuestionAdapterDelegate> mDelegate;
@@ -44,13 +44,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
     @Override
     public QuestionAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_list_item, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.question_list_item, parent, false);
         return new QuestionAdapterViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(QuestionAdapterViewHolder questionAdapterViewHolder, int position) {
-        questionAdapterViewHolder.update(position, mQuestions.get(position));
+    public void onBindViewHolder(QuestionAdapterViewHolder holder, int position) {
+        holder.update(position, mQuestions.get(position));
     }
 
     @Override
@@ -94,7 +95,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             super(itemView);
             questionString = (TextView) itemView.findViewById(R.id.text_question_string);
             timeStamp = (TextView) itemView.findViewById(R.id.text_question_time_stamp);
-            numAnswers = (TextView) itemView.findViewById(R.id.text_question_num_answers);
+            numAnswers = (TextView) itemView.findViewById(R.id.text_question_number_of_answers);
             userImage = (ImageView) itemView.findViewById(R.id.image_question_user_image);
 
             itemView.setOnClickListener(this);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_answer_string"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Here's my response..."/>
+
+    <ImageView
+        android:id="@+id/image_answer_user_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_answer_string"
+        tools:src="@android:drawable/star_big_on"/>
+
+    <TextView
+        android:id="@+id/text_number_of_up_votes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_answer_string"
+        android:layout_toRightOf="@id/image_answer_user_image"
+        tools:text="30 votes"/>
+
+    <ImageButton
+        android:id="@+id/button_up_vote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_answer_string"
+        android:layout_alignParentRight="true"
+        tools:src="@drawable/ic_mood_black_24dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/button_up_vote"
+        android:background="@android:color/darker_gray"/>
+</RelativeLayout>

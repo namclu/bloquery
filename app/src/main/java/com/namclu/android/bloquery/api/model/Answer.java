@@ -38,11 +38,16 @@ public class Answer {
     }
 
     // Create a new Answer object
-    public Answer(String answerId, String answerString, String questionId, long timeStamp,
+    public Answer(String questionId, String answerId, String answerString, int numberUpVotes, long userId) {
+
+    }
+
+    // Create a new Answer object
+    public Answer(String questionId, String answerId, String answerString, long timeStamp,
                   int numberUpVotes, long userId, int userImageResId, boolean userUpVoted) {
+        mQuestionId = questionId;
         mAnswerId = answerId;
         mAnswerString = answerString;
-        mQuestionId = questionId;
         mTimeStamp = timeStamp;
         mNumberUpVotes = numberUpVotes;
         mUserId = userId;
