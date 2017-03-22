@@ -108,7 +108,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             this.questionString.setText(question.getQuestionString());
             timeStamp.setText("Timestamp: " + question.getTimeStamp());
             numAnswers.setText("# of answers: " + question.getNumberOfAnswers());
-            userImage.setImageResource(question.getUserImageResId());
+            //userImage.setImageResource(question.getUserImageResId());
         }
 
         // Only method of View.OnClickListener

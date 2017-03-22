@@ -26,6 +26,8 @@ public class QuestionDataSource {
 
     public QuestionDataSource() {
         mQuestions = new ArrayList<>();
+
+        writeNewQuestion("What is your question?", 7, 11);
     }
 
     public List<Question> getQuestions() {
