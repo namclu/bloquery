@@ -32,6 +32,6 @@
     </string>
 
     <!-- ActionBar strings -->
-    <string name="menu_answer">Add an answer</string>
+    <string name="menu_answer">Add Answer</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.namclu.android.bloquery.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,7 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.api.AnswerDataSource;
 import com.namclu.android.bloquery.api.model.Answer;
 import com.namclu.android.bloquery.api.model.Question;
 import com.namclu.android.bloquery.ui.adapter.AnswerAdapter;
@@ -99,11 +99,11 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() ==  R.id.action_answer) {
-            new AnswerDataSource(questionId);
-            /*Intent answerIntent = new Intent(this, SubmitAnswerActivity.class);
-            answerIntent.putExtra("questionId", questionId);
+            //new AnswerDataSource(questionId);
+            Intent answerIntent = new Intent(this, SubmitAnswerActivity.class);
+            answerIntent.putExtra("question_id", questionId);
 
-            startActivity(answerIntent);*/
+            startActivity(answerIntent);
         }
 
         return super.onOptionsItemSelected(item);

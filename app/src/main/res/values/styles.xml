@@ -16,4 +16,10 @@
         <item name="android:paddingLeft">@dimen/default_padding</item>
     </style>
 
+    <style name="PaddingButton">
+        <item name="android:layout_marginTop">@dimen/button_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/button_vertical_margin</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
 </resources>

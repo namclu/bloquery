@@ -32,6 +32,7 @@ public class BloqueryActivity extends Activity
     /* Constants */
     public static final String TAG = "BloqueryActivity";
     public static final String QUESTIONS = "questions";
+    public static final String EXTRA_QUESTION_ID_KEY = "question_id";
 
     /* private fields */
     // A reference to an {@link RecyclerView.Adapter}
@@ -127,7 +128,7 @@ public class BloqueryActivity extends Activity
         String questionId = questionItem.getQuestionId();
 
         Intent intent = new Intent(this, SingleQuestionActivity.class);
-        intent.putExtra("question_id", questionId);
+        intent.putExtra(EXTRA_QUESTION_ID_KEY, questionId);
 
         startActivity(intent);
     }
