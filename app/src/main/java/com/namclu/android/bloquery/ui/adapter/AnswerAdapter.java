@@ -78,7 +78,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdap
             this.position = position;
 
             answerString.setText(answer.getAnswerString());
-            userImage.setImageResource(answer.getUserImageResId());
+            //userImage.setImageResource(answer.getUserImageResId());
             numUpVotes.setText(answer.getNumberUpVotes() + " votes");
             //buttonUpVote.setImageResource();
         }

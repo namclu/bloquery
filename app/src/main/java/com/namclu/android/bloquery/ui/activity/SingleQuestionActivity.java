@@ -30,15 +30,15 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     /* private fields */
     private AnswerAdapter mAnswerAdapter;
 
-    private DatabaseReference mDatabaseReference;
     private DatabaseReference mQuestionsReference;
+    private DatabaseReference mAnswersReference;
 
     private TextView questionString;
     private TextView timeStamp;
     private TextView numAnswers;
     private ImageView userImage;
 
-    String questionId;
+    private String mQuestionId;
     private int position;
 
 
@@ -49,16 +49,28 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
         setContentView(R.layout.activity_single_question);
 
         // Get the intent data from BloqueryActivity
-        questionId = getIntent().getStringExtra("question_id");
+        mQuestionId = getIntent().getStringExtra("question_id");
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("questions/" + questionId);
-
+        // Initialise Views
         questionString = (TextView) findViewById(R.id.text_single_question_string);
         timeStamp = (TextView) findViewById(R.id.text_single_question_time_stamp);
         numAnswers = (TextView) findViewById(R.id.text_single_question_num_answers);
         userImage = (ImageView) findViewById(R.id.image_single_question_user_image);
 
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        // Initialise Database
+        mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions").child(mQuestionId);
+        mAnswersReference = mQuestionsReference.child("answers");
+        mAnswersReference.addChildEventListener(this);
+
+        /* RecyclerView stuff */
+        mAnswerAdapter = new AnswerAdapter();
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_answers);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAnswerAdapter);
+
+        // Set values for this Question object
+        mQuestionsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 questionString.setText(dataSnapshot.getValue(Question.class).getQuestionString());
@@ -72,14 +84,11 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
 
             }
         });
+    }
 
-        /* RecyclerView stuff */
-        mAnswerAdapter = new AnswerAdapter();
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_answers);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAnswerAdapter);
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -99,9 +108,9 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() ==  R.id.action_answer) {
-            //new AnswerDataSource(questionId);
+            //new AnswerDataSource(mQuestionId);
             Intent answerIntent = new Intent(this, SubmitAnswerActivity.class);
-            answerIntent.putExtra("question_id", questionId);
+            answerIntent.putExtra("question_id", mQuestionId);
 
             startActivity(answerIntent);
         }

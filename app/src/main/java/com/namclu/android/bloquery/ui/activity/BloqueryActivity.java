@@ -31,20 +31,12 @@ public class BloqueryActivity extends Activity
 
     /* Constants */
     public static final String TAG = "BloqueryActivity";
-    public static final String QUESTIONS = "questions";
     public static final String EXTRA_QUESTION_ID_KEY = "question_id";
 
-    /* private fields */
-    // A reference to an {@link RecyclerView.Adapter}
     private QuestionAdapter mQuestionAdapter;
 
-    // A reference to the {@link RecyclerView} in the activity_bloquery.xml layout
     private RecyclerView mQueryRecyclerView;
 
-    // A reference to the root Firebase {@link DatabaseReference} object
-    private DatabaseReference mDatabaseReference;
-
-    // A reference to a child Firebase {@link DatabaseReference} object
     private DatabaseReference mQuestionsReference;
 
     @Override
@@ -60,14 +52,13 @@ public class BloqueryActivity extends Activity
         // Initialize Views in the layout
         mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_question);
 
-        // Set the layout, animator, and adapter for recyclerView
+        // Set the layout, animator, and adapter for RecyclerView
         mQueryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mQueryRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mQueryRecyclerView.setAdapter(mQuestionAdapter);
 
-        // Firebase: initialize references
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mQuestionsReference = mDatabaseReference.child(QUESTIONS);
+        // Initialise database;
+        mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions");
 
         // Use QuestionDataSource.writeNewQuestion() to add Question to Firebase
         QuestionDataSource dataSource = new QuestionDataSource();
