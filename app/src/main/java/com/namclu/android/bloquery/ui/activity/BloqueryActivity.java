@@ -1,11 +1,13 @@
 package com.namclu.android.bloquery.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,15 +26,13 @@ import java.util.List;
  * <p>
  * BloqueryActivity.java is the default main screen of the app.
  */
-public class BloqueryActivity extends Activity
+public class BloqueryActivity extends AppCompatActivity
         implements
         ChildEventListener,
         QuestionAdapter.QuestionAdapterDelegate {
 
     /* Constants */
     public static final String TAG = "BloqueryActivity";
-    public static final String QUESTIONS = "questions";
-    public static final String EXTRA_MESSAGE = "com.namclu.MESSAGE";
 
     /* private fields */
     // A reference to an {@link RecyclerView.Adapter}
@@ -41,10 +41,7 @@ public class BloqueryActivity extends Activity
     // A reference to the {@link RecyclerView} in the activity_bloquery.xml layout
     private RecyclerView mQueryRecyclerView;
 
-    // A reference to the root Firebase {@link DatabaseReference} object
     private DatabaseReference mDatabaseReference;
-
-    // A reference to a child Firebase {@link DatabaseReference} object
     private DatabaseReference mQuestionsReference;
 
     @Override
@@ -65,9 +62,9 @@ public class BloqueryActivity extends Activity
         mQueryRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mQueryRecyclerView.setAdapter(mQuestionAdapter);
 
-        // Firebase: initialize references
+        // Initialize database
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mQuestionsReference = mDatabaseReference.child(QUESTIONS);
+        mQuestionsReference = mDatabaseReference.child("questions");
 
         // Use QuestionDataSource.writeNewQuestion() to add Question to Firebase
         QuestionDataSource dataSource = new QuestionDataSource();
@@ -88,9 +85,24 @@ public class BloqueryActivity extends Activity
         mQuestionAdapter.clear();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bloquery, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = new Intent(this, AddQuestionActivity.class);
+        startActivity(intent);
+
+        return super.onOptionsItemSelected(item);
+    }
+
     /*
-     * Firebase: Required methods of ChildEventListener
-     */
+         * Firebase: Required methods of ChildEventListener
+         */
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
         Question question = dataSnapshot.getValue(Question.class);
@@ -128,7 +140,7 @@ public class BloqueryActivity extends Activity
         String id = questionItem.getQuestionId();
 
         Intent intent = new Intent(this, SingleQuestionActivity.class);
-        intent.putExtra("ID", id);
+        intent.putExtra("EXTRA_QUESTION_ID", id);
 
         startActivity(intent);
     }

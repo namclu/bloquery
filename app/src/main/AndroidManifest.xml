@@ -36,7 +36,11 @@
             android:name=".ui.activity.BloqueryActivity"
             android:label="@string/title_activity_bloquery">
         </activity>
+
         <activity android:name=".ui.activity.SingleQuestionActivity">
+        </activity>
+        <activity android:name=".ui.activity.AddQuestionActivity"
+            android:label="@string/title_activity_add_question">
         </activity>
     </application>
 

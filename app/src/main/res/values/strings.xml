@@ -30,4 +30,7 @@
         completions."
     </string>
 
+    <string name="menu_add_question">Add Question</string>
+    <string name="title_activity_add_question">Add Question</string>
+
 </resources>
