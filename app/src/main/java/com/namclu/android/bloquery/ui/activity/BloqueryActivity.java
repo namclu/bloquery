@@ -101,8 +101,8 @@ public class BloqueryActivity extends AppCompatActivity
     }
 
     /*
-         * Firebase: Required methods of ChildEventListener
-         */
+     * Firebase: Required methods of ChildEventListener
+     */
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
         Question question = dataSnapshot.getValue(Question.class);

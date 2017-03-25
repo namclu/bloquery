@@ -32,4 +32,10 @@
         android:layout_below="@id/text_question_string"
         android:layout_alignParentRight="true"
         tools:src="@android:drawable/star_big_on"/>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

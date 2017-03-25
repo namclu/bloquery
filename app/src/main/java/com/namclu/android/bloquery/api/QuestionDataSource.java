@@ -17,7 +17,6 @@ public class QuestionDataSource {
 
     /* Constants */
     public static final String TAG = "QuestionDataSource";
-    public static final String QUESTIONS = "questions";
 
     /* private fields */
     private List<Question> mQuestions;
@@ -25,6 +24,10 @@ public class QuestionDataSource {
     private DatabaseReference mQuestionReference;
 
     public QuestionDataSource() {
+
+    }
+
+    public QuestionDataSource(String questionId) {
         mQuestions = new ArrayList<>();
     }
 
@@ -33,11 +36,11 @@ public class QuestionDataSource {
     }
 
     // Method to write a new Question object into database
-    private void writeNewQuestion(String questionString, int timeStamp, int numberOfAnswers) {
+    public void writeNewQuestion(String questionString, int timeStamp, int numberOfAnswers) {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mQuestionReference = mDatabaseReference.child(QUESTIONS);
+        mQuestionReference = mDatabaseReference.child("questions");
 
-        String key = mDatabaseReference.push().getKey();
+        String key = mQuestionReference.push().getKey();
         Question question = new Question(key, questionString, timeStamp, numberOfAnswers);
         mQuestionReference.child(key).setValue(question);
     }

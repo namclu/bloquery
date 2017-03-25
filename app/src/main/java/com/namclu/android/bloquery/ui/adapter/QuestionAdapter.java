@@ -44,13 +44,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
     @Override
     public QuestionAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_list_item, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.question_list_item, parent, false);
         return new QuestionAdapterViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(QuestionAdapterViewHolder questionAdapterViewHolder, int position) {
-        questionAdapterViewHolder.update(position, mQuestions.get(position));
+    public void onBindViewHolder(QuestionAdapterViewHolder holder, int position) {
+        holder.update(position, mQuestions.get(position));
     }
 
     @Override
@@ -107,7 +108,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             this.questionString.setText(question.getQuestionString());
             timeStamp.setText("Timestamp: " + question.getTimeStamp());
             numAnswers.setText("# of answers: " + question.getNumberOfAnswers());
-            userImage.setImageResource(question.getUserImageResId());
+            //userImage.setImageResource(question.getUserImageResId());
+            //userImage.setVisibility(View.VISIBLE);
         }
 
         // Only method of View.OnClickListener
@@ -117,6 +119,5 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                 getQuestionAdapterDelegate().onItemClicked(position, mQuestions);
             }
         }
-
     }
 }
