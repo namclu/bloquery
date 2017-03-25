@@ -2,11 +2,9 @@ package com.namclu.android.bloquery.api;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.namclu.android.bloquery.api.model.Answer;
 import com.namclu.android.bloquery.api.model.Question;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,7 +27,7 @@ public class QuestionDataSource {
     public QuestionDataSource() {
         mQuestions = new ArrayList<>();
 
-        writeNewQuestion("TEST QUESTION --- click me to see a list of answers!!!", 7, 11);
+        //writeNewQuestion("TEST QUESTION --- click me to see a list of answers!!!", 7, 11);
     }
 
     public List<Question> getQuestions() {
@@ -41,22 +39,8 @@ public class QuestionDataSource {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mQuestionReference = mDatabaseReference.child(QUESTIONS);
 
-        /*String key = mDatabaseReference.push().getKey();
+        String key = mDatabaseReference.push().getKey();
         Question question = new Question(key, questionString, timeStamp, numberOfAnswers);
-        mQuestionReference.child(key).setValue(question);*/
-
-        Question question = new Question("1", questionString, timeStamp, numberOfAnswers);
-
-        List<Answer> answers = Arrays.asList(
-                Answer.provideTestAnswer(),
-                Answer.provideTestAnswer(),
-                Answer.provideTestAnswer(),
-                Answer.provideTestAnswer(),
-                Answer.provideTestAnswer()
-        );
-
-        question.setAnswers(answers);
-
-        mQuestionReference.child("1").setValue(question);
+        mQuestionReference.child(key).setValue(question);
     }
 }

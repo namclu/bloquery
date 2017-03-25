@@ -37,13 +37,13 @@ public class AnswerDataSource {
     }
 
     // Method to write a new Answer object into database
-    public void writeNewAnswer(String questionId, String answerId, String answerString, int numberUpVotes, int numberOfAnswers) {
+    public void writeNewAnswer(String questionId, String answerId, String answerString, int numberUpVotes, int timeStamp) {
         //Log.v(TAG, "in writeNewAnswer()");
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mAnswerReference = mDatabaseReference.child("answers");
+        mAnswerReference = mDatabaseReference.child("questions").child(questionId).child("answers");
 
-        String key = mDatabaseReference.push().getKey();
-        Answer answer = new Answer(answerId, answerString, numberUpVotes, numberOfAnswers);
+        String key = mAnswerReference.push().getKey();
+        Answer answer = new Answer(key, answerString, numberUpVotes, timeStamp);
         mAnswerReference.child(key).setValue(answer);
     }
 }
