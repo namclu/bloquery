@@ -32,17 +32,12 @@ public class Answer {
     private int mUserImageResId = NO_IMAGE;
     private boolean mUserUpVoted = false;
 
-    // Creates a no-argument Answer object
-    public Answer() {
-        // Default constructor required for calls to DataSnapshot.getValue(Question.class)
-    }
+    // required for Firebase deserialization
+    public Answer() {}
 
-    // Create a new Answer object
-    public Answer(String answerId, String answerString, int numberUpVotes, int timeStamp) {
-        mAnswerId = answerId;
-        mAnswerString = answerString;
-        mNumberUpVotes = numberUpVotes;
-        mTimeStamp = timeStamp;
+    // Creates a no-argument Answer object
+    public Answer(String key, String answerString, int numberUpVotes, long timeStamp) {
+        // Default constructor required for calls to DataSnapshot.getValue(Question.class)
     }
 
     // Create a new Answer object

@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.AnswerDataSource;
+import com.namclu.android.bloquery.api.model.Answer;
 
 public class SubmitAnswerActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -33,7 +33,7 @@ public class SubmitAnswerActivity extends AppCompatActivity implements View.OnCl
 
         // Initialise Database
         mAnswerReference = FirebaseDatabase.getInstance().getReference().
-                child("questions").child(mQuestionId).child("answers");
+                child("answers").child(mQuestionId);
 
         // Initialise Views
         mEditSubmitAnswer = (EditText) findViewById(R.id.edit_submit_answer);
@@ -70,7 +70,15 @@ public class SubmitAnswerActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         String answerString = mEditSubmitAnswer.getText().toString();
-        mAnswerDataSource.writeNewAnswer(mQuestionId, null, answerString, 0, 0);
+
+        //mAnswerDataSource.writeNewAnswer(mQuestionId, answerString, 0, System.currentTimeMillis());
+
+        String key = mAnswerReference.push().getKey();
+
+        Answer answer = new Answer(key, answerString, 66, System.currentTimeMillis());
+
+        mAnswerReference.child(key).setValue(answer);
+
         Toast.makeText(this, "Answer Added!", Toast.LENGTH_SHORT).show();
         this.finish();
         /*if (mEditSubmitAnswer != null) {

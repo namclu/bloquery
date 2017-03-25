@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,7 +58,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
 
         // Initialise Database
         mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions").child(mQuestionId);
-        mAnswersReference = mQuestionsReference.child("answers");
+        mAnswersReference = FirebaseDatabase.getInstance().getReference("answers").child(mQuestionId);
         mAnswersReference.addChildEventListener(this);
 
         /* RecyclerView stuff */
