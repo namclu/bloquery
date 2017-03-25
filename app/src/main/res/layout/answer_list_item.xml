@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
     <TextView
         android:id="@+id/text_answer_string"
@@ -29,8 +30,8 @@
         android:id="@+id/button_up_vote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_answer_string"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         tools:src="@drawable/ic_mood_black_24dp"/>
 
     <View

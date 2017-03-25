@@ -73,10 +73,12 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
         mQuestionsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                questionString.setText(dataSnapshot.getValue(Question.class).getQuestionString());
+                /*questionString.setText(dataSnapshot.getValue(Question.class).getQuestionString());
                 timeStamp.setText("Timestamp: " + dataSnapshot.getValue(Question.class).getTimeStamp());
                 numAnswers.setText("# of answers: " + dataSnapshot.getValue(Question.class).getNumberOfAnswers());
-                //userImage.setImageResource(dataSnapshot.getValue(Question.class).getUserImageResId());
+                //userImage.setImageResource(dataSnapshot.getValue(Question.class).getUserImageResId());*/
+                Question question = dataSnapshot.getValue(Question.class);
+                mAnswerAdapter.addAnswers(question.getAnswers());
             }
 
             @Override

@@ -121,4 +121,8 @@ public class Answer {
     public void setUserUpVoted(boolean userUpVoted) {
         mUserUpVoted = userUpVoted;
     }
+
+    public static Answer provideTestAnswer() {
+        return new Answer("14", "this is a test answer", 44, 334455);
+    }
 }

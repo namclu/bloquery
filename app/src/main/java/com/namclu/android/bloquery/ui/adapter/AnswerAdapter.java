@@ -32,6 +32,12 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdap
         notifyDataSetChanged();
     }
 
+    // Add a List<Answer>
+    public void addAnswers(List<Answer> answers) {
+        mAnswers.addAll(answers);
+        notifyDataSetChanged();
+    }
+
     @Override
     public AnswerAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(
