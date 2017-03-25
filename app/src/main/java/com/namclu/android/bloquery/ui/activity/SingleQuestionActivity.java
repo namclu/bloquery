@@ -95,9 +95,9 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     @Override
     protected void onRestart() {
         super.onRestart();
-
-        // call to clear previous data from adapter when restarting
-        mAnswerAdapter.clear();
+        //
+        //// call to clear previous data from adapter when restarting
+        //mAnswerAdapter.clear();
     }
 
     @Override

@@ -23,6 +23,7 @@ public class Answer {
      * @param mUserImageResId   Resource ID for user image
      * @param mUserUpVoted      Indicates if the user has previously up voted this answer
      */
+
     private String mAnswerId;
     private String mAnswerString;
     private String mQuestionId;
@@ -33,11 +34,15 @@ public class Answer {
     private boolean mUserUpVoted = false;
 
     // required for Firebase deserialization
+    // Default constructor required for calls to DataSnapshot.getValue(Question.class)
     public Answer() {}
 
     // Creates a no-argument Answer object
     public Answer(String key, String answerString, int numberUpVotes, long timeStamp) {
-        // Default constructor required for calls to DataSnapshot.getValue(Question.class)
+        mQuestionId = key;
+        mAnswerString = answerString;
+        mNumberUpVotes = numberUpVotes;
+        mTimeStamp = timeStamp;
     }
 
     // Create a new Answer object
