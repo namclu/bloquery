@@ -38,18 +38,18 @@ public class Answer {
     }
 
     // Create a new Answer object
-    public Answer(String answerId, String answerString, int numberUpVotes, int timeStamp) {
-        mAnswerId = answerId;
+    public Answer(String key, String answerString, int numberUpVotes, long timeStamp) {
+        mAnswerId = key;
         mAnswerString = answerString;
         mNumberUpVotes = numberUpVotes;
         mTimeStamp = timeStamp;
     }
 
     // Create a new Answer object
-    public Answer(String questionId, String answerId, String answerString, long timeStamp,
+    public Answer(String questionId, String key, String answerString, long timeStamp,
                   int numberUpVotes, long userId, int userImageResId, boolean userUpVoted) {
         mQuestionId = questionId;
-        mAnswerId = answerId;
+        mAnswerId = key;
         mAnswerString = answerString;
         mTimeStamp = timeStamp;
         mNumberUpVotes = numberUpVotes;

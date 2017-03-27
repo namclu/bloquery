@@ -1,8 +1,8 @@
 package com.namclu.android.bloquery.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.api.QuestionDataSource;
 import com.namclu.android.bloquery.api.model.Question;
 import com.namclu.android.bloquery.ui.adapter.QuestionAdapter;
 
@@ -24,7 +23,7 @@ import java.util.List;
  * <p>
  * BloqueryActivity.java is the default main screen of the app.
  */
-public class BloqueryActivity extends Activity
+public class BloqueryActivity extends AppCompatActivity
         implements
         ChildEventListener,
         QuestionAdapter.QuestionAdapterDelegate {
@@ -59,9 +58,6 @@ public class BloqueryActivity extends Activity
 
         // Initialise database;
         mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions");
-
-        // Use QuestionDataSource.writeNewQuestion() to add Question to Firebase
-        QuestionDataSource dataSource = new QuestionDataSource();
     }
 
     @Override
@@ -69,14 +65,6 @@ public class BloqueryActivity extends Activity
         super.onStart();
 
         mQuestionsReference.addChildEventListener(this);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        // call to clear previous data from adapter when restarting
-        mQuestionAdapter.clear();
     }
 
     /*

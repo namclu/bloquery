@@ -1,5 +1,6 @@
 package com.namclu.android.bloquery.api.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class Question {
     private String mQuestionId;
     private String mQuestionString;
     private long mTimeStamp;
-    private List<Answer> mAnswers;
+    private List<Answer> mAnswers = new ArrayList<>();
     private int mNumberOfAnswers = NO_ANSWERS;
     private long mUserId;
     private int mUserImageResId = NO_IMAGE;
@@ -43,16 +44,16 @@ public class Question {
     }
 
     // Creates a new Question object
-    public Question(String questionId, String questionString, long timeStamp, int numberOfAnswers) {
-        mQuestionId = questionId;
+    public Question(String key, String questionString, long timeStamp, int numberOfAnswers) {
+        mQuestionId = key;
         mQuestionString = questionString;
         mTimeStamp = timeStamp;
         mNumberOfAnswers = numberOfAnswers;
     }
 
     // Creates a new Question object
-    public Question(String questionId, String questionString, long timeStamp, int numberOfAnswers, long userId, int userImageResId) {
-        mQuestionId = questionId;
+    public Question(String key, String questionString, long timeStamp, int numberOfAnswers, long userId, int userImageResId) {
+        mQuestionId = key;
         mQuestionString = questionString;
         mTimeStamp = timeStamp;
         mNumberOfAnswers = numberOfAnswers;

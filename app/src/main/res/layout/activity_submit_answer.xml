@@ -30,12 +30,12 @@
 
         <!-- Add Answer button -->
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button_submit_answer"
+            android:id="@+id/button_add_answer"
             style="@style/PaddingButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Add Answer"/>
+            android:text="@string/button_text_add_answer"/>
 
     </LinearLayout>
 </ScrollView>

@@ -37,6 +37,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/button_up_vote"
+        android:layout_alignParentBottom="true"
         android:background="@android:color/darker_gray"/>
 </RelativeLayout>

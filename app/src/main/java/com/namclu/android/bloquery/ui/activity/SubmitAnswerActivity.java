@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.AnswerDataSource;
+import com.namclu.android.bloquery.api.model.Answer;
 
 public class SubmitAnswerActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -33,53 +34,24 @@ public class SubmitAnswerActivity extends AppCompatActivity implements View.OnCl
 
         // Initialise Database
         mAnswerReference = FirebaseDatabase.getInstance().getReference().
-                child("questions").child(mQuestionId).child("answers");
+                child("answers").child(mQuestionId);
 
         // Initialise Views
         mEditSubmitAnswer = (EditText) findViewById(R.id.edit_submit_answer);
-        mButtonSubmitAnswer = (Button) findViewById(R.id.button_submit_answer);
+        mButtonSubmitAnswer = (Button) findViewById(R.id.button_add_answer);
 
         mButtonSubmitAnswer.setOnClickListener(this);
-        mAnswerDataSource = new AnswerDataSource();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        // Add value event listener to the post
-        /*ValueEventListener answerListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (mEditSubmitAnswer != null) {
-                    String answer = mEditSubmitAnswer.getText().toString();
-                    //String answerKey = mAnswerReference.push();
-
-                    Toast.makeText(SubmitAnswerActivity.this, "Answer Added!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        mAnswerReference.addValueEventListener(answerListener);*/
     }
 
     @Override
     public void onClick(View view) {
         String answerString = mEditSubmitAnswer.getText().toString();
-        mAnswerDataSource.writeNewAnswer(mQuestionId, null, answerString, 0, 0);
+
+        String key = mAnswerReference.push().getKey();
+        Answer answer = new Answer(key, answerString, 0, System.currentTimeMillis());
+        mAnswerReference.child(key).setValue(answer);
+
         Toast.makeText(this, "Answer Added!", Toast.LENGTH_SHORT).show();
         this.finish();
-        /*if (mEditSubmitAnswer != null) {
-            String answer = mEditSubmitAnswer.getText().toString();
-            mAnswerReference.setValue(answer);
-
-            Toast.makeText(SubmitAnswerActivity.this, "Answer Added!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(SubmitAnswerActivity.this, "Please enter an answer.", Toast.LENGTH_SHORT).show();
-        }*/
     }
 }

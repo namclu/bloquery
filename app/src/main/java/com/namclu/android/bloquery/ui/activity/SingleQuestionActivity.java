@@ -59,7 +59,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
 
         // Initialise Database
         mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions").child(mQuestionId);
-        mAnswersReference = mQuestionsReference.child("answers");
+        mAnswersReference = FirebaseDatabase.getInstance().getReference("answers").child(mQuestionId);
         mAnswersReference.addChildEventListener(this);
 
         /* RecyclerView stuff */
@@ -73,10 +73,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
         mQuestionsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                /*questionString.setText(dataSnapshot.getValue(Question.class).getQuestionString());
-                timeStamp.setText("Timestamp: " + dataSnapshot.getValue(Question.class).getTimeStamp());
-                numAnswers.setText("# of answers: " + dataSnapshot.getValue(Question.class).getNumberOfAnswers());
-                //userImage.setImageResource(dataSnapshot.getValue(Question.class).getUserImageResId());*/
+
                 Question question = dataSnapshot.getValue(Question.class);
                 mAnswerAdapter.addAnswers(question.getAnswers());
             }
@@ -91,14 +88,6 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        // call to clear previous data from adapter when restarting
-        mAnswerAdapter.clear();
     }
 
     @Override
