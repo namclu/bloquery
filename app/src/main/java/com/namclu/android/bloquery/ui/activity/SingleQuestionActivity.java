@@ -16,10 +16,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.model.Answer;
-import com.namclu.android.bloquery.api.model.Question;
 import com.namclu.android.bloquery.ui.adapter.AnswerAdapter;
 
 public class SingleQuestionActivity extends AppCompatActivity implements ChildEventListener{
@@ -28,11 +26,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     public static final String TAG = "SingleQuestionActivity";
 
     /* private fields */
-    private AnswerAdapter mAnswerAdapter;
-
-    private DatabaseReference mQuestionsReference;
-    private DatabaseReference mAnswersReference;
-
+    private TextView userEmail;
     private TextView questionString;
     private TextView timeStamp;
     private TextView numAnswers;
@@ -41,6 +35,10 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     private String mQuestionId;
     private int position;
 
+    private AnswerAdapter mAnswerAdapter;
+
+    private DatabaseReference mQuestionsReference;
+    private DatabaseReference mAnswersReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +47,10 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
         setContentView(R.layout.activity_single_question);
 
         // Get the intent data from BloqueryActivity
-        mQuestionId = getIntent().getStringExtra("question_id");
+        mQuestionId = getIntent().getStringExtra("question_id_key");
 
         // Initialise Views
+        userEmail = (TextView) findViewById(R.id.text_single_question_user_email);
         questionString = (TextView) findViewById(R.id.text_single_question_string);
         timeStamp = (TextView) findViewById(R.id.text_single_question_time_stamp);
         numAnswers = (TextView) findViewById(R.id.text_single_question_num_answers);
@@ -60,6 +59,8 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
         // Initialise Database
         mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions").child(mQuestionId);
         mAnswersReference = FirebaseDatabase.getInstance().getReference("answers").child(mQuestionId);
+
+        // Set listener on Database
         mAnswersReference.addChildEventListener(this);
 
         /* RecyclerView stuff */
@@ -68,26 +69,14 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAnswerAdapter);
-
-        // Set values for this Question object
-        mQuestionsReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Question question = dataSnapshot.getValue(Question.class);
-                mAnswerAdapter.addAnswers(question.getAnswers());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        // Set values for this single Question object
+        questionString.setText(getIntent().getStringExtra("question_string"));
     }
 
     @Override
@@ -101,7 +90,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
         if (item.getItemId() ==  R.id.action_answer) {
             //new AnswerDataSource(mQuestionId);
             Intent answerIntent = new Intent(this, SubmitAnswerActivity.class);
-            answerIntent.putExtra("question_id", mQuestionId);
+            answerIntent.putExtra("question_id_key", mQuestionId);
 
             startActivity(answerIntent);
         }

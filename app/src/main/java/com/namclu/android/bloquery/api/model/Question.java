@@ -29,7 +29,7 @@ public class Question {
     private long mTimeStamp;
     private List<Answer> mAnswers = new ArrayList<>();
     private int mNumberOfAnswers = NO_ANSWERS;
-    private long mUserId;
+    private String mUserId;
     private int mUserImageResId = NO_IMAGE;
 
     // Creates a no-argument Question object
@@ -52,7 +52,7 @@ public class Question {
     }
 
     // Creates a new Question object
-    public Question(String key, String questionString, long timeStamp, int numberOfAnswers, long userId, int userImageResId) {
+    public Question(String key, String questionString, long timeStamp, int numberOfAnswers, String userId, int userImageResId) {
         mQuestionId = key;
         mQuestionString = questionString;
         mTimeStamp = timeStamp;
@@ -101,11 +101,11 @@ public class Question {
         mNumberOfAnswers = numberOfAnswers;
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return mUserId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         mUserId = userId;
     }
 

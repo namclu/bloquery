@@ -30,7 +30,9 @@ public class BloqueryActivity extends AppCompatActivity
 
     /* Constants */
     public static final String TAG = "BloqueryActivity";
-    public static final String EXTRA_QUESTION_ID_KEY = "question_id";
+    public static final String EXTRA_QUESTION_ID_KEY = "question_id_key";
+    public static final String EXTRA_QUESTION_STRING = "question_string";
+    public static final String EXTRA_USER_EMAIL = "user_email";
 
     private QuestionAdapter mQuestionAdapter;
 
@@ -108,6 +110,7 @@ public class BloqueryActivity extends AppCompatActivity
 
         Intent intent = new Intent(this, SingleQuestionActivity.class);
         intent.putExtra(EXTRA_QUESTION_ID_KEY, questionId);
+        intent.putExtra(EXTRA_QUESTION_STRING, questionItem.getQuestionString());
 
         startActivity(intent);
     }

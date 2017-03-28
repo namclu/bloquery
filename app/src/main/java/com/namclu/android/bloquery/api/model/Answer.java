@@ -28,7 +28,7 @@ public class Answer {
     private String mQuestionId;
     private long mTimeStamp;
     private int mNumberUpVotes = NO_UP_VOTES;
-    private long mUserId;
+    private String mUserId;
     private int mUserImageResId = NO_IMAGE;
     private boolean mUserUpVoted = false;
 
@@ -46,14 +46,23 @@ public class Answer {
     }
 
     // Create a new Answer object
-    public Answer(String questionId, String key, String answerString, long timeStamp,
-                  int numberUpVotes, long userId, int userImageResId, boolean userUpVoted) {
+    public Answer(String userId, String key, String answerString, int numberUpVotes, long timeStamp) {
+        mUserId = userId;
+        mAnswerId = key;
+        mAnswerString = answerString;
+        mNumberUpVotes = numberUpVotes;
+        mTimeStamp = timeStamp;
+    }
+
+    // Create a new Answer object
+    public Answer(String userId, String questionId, String key, String answerString, long timeStamp,
+                  int numberUpVotes, int userImageResId, boolean userUpVoted) {
+        mUserId = userId;
         mQuestionId = questionId;
         mAnswerId = key;
         mAnswerString = answerString;
         mTimeStamp = timeStamp;
         mNumberUpVotes = numberUpVotes;
-        mUserId = userId;
         mUserImageResId = userImageResId;
         mUserUpVoted = userUpVoted;
     }
@@ -98,11 +107,11 @@ public class Answer {
         mNumberUpVotes = numberUpVotes;
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return mUserId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         mUserId = userId;
     }
 
