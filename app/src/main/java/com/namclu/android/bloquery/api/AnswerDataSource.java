@@ -2,7 +2,6 @@ package com.namclu.android.bloquery.api;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.namclu.android.bloquery.api.model.Answer;
 
 /**
  * Created by namlu on 22-Mar-17.
@@ -42,7 +41,7 @@ public class AnswerDataSource {
         mAnswerReference = mDatabaseReference.child("answers").child(questionId);
 
         String key = mAnswerReference.push().getKey();
-        Answer answer = new Answer(key, answerString, numberUpVotes, timeStamp);
-        mAnswerReference.child(key).setValue(answer);
+        //Answer answer = new Answer(key, answerString, numberUpVotes, timeStamp);
+        //mAnswerReference.child(key).setValue(answer);
     }
 }

@@ -38,33 +38,25 @@ public class Answer {
     }
 
     // Create a new Answer object
-    public Answer(String key, String answerString, int numberUpVotes, long timeStamp) {
-        mAnswerId = key;
-        mAnswerString = answerString;
-        mNumberUpVotes = numberUpVotes;
-        mTimeStamp = timeStamp;
+    public Answer(String userId, String key, String answerString, long timeStamp,
+                  int numberUpVotes) {
+        setUserId(userId);
+        setAnswerId(key);
+        setAnswerString(answerString);
+        setTimeStamp(timeStamp);
+        setNumberUpVotes(numberUpVotes);
     }
 
     // Create a new Answer object
-    public Answer(String userId, String key, String answerString, int numberUpVotes, long timeStamp) {
-        mUserId = userId;
-        mAnswerId = key;
-        mAnswerString = answerString;
-        mNumberUpVotes = numberUpVotes;
-        mTimeStamp = timeStamp;
-    }
-
-    // Create a new Answer object
-    public Answer(String userId, String questionId, String key, String answerString, long timeStamp,
+    public Answer(String userId, String key, String answerString, long timeStamp,
                   int numberUpVotes, int userImageResId, boolean userUpVoted) {
-        mUserId = userId;
-        mQuestionId = questionId;
-        mAnswerId = key;
-        mAnswerString = answerString;
-        mTimeStamp = timeStamp;
-        mNumberUpVotes = numberUpVotes;
-        mUserImageResId = userImageResId;
-        mUserUpVoted = userUpVoted;
+        setUserId(userId);
+        setAnswerId(key);
+        setAnswerString(answerString);
+        setTimeStamp(timeStamp);
+        setNumberUpVotes(numberUpVotes);
+        setUserImageResId(userImageResId);
+        setUserUpVoted(userUpVoted);
     }
 
     public String getAnswerId() {
@@ -129,9 +121,5 @@ public class Answer {
 
     public void setUserUpVoted(boolean userUpVoted) {
         mUserUpVoted = userUpVoted;
-    }
-
-    public static Answer provideTestAnswer() {
-        return new Answer("14", "this is a test answer", 44, 334455);
     }
 }

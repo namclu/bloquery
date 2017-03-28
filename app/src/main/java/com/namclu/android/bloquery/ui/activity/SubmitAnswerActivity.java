@@ -52,7 +52,7 @@ public class SubmitAnswerActivity extends AppCompatActivity implements View.OnCl
 
         String key = mAnswerReference.push().getKey();
         String userId = mCurrentUser.getCurrentUser().getUid();
-        Answer answer = new Answer(userId, key, answerString, 0, System.currentTimeMillis());
+        Answer answer = new Answer(userId, key, answerString, (long) System.currentTimeMillis(), 0);
         mAnswerReference.child(key).setValue(answer);
 
         Toast.makeText(this, "Answer Added!", Toast.LENGTH_SHORT).show();

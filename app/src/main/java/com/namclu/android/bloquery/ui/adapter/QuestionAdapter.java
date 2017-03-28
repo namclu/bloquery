@@ -11,7 +11,9 @@ import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.model.Question;
 
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -105,10 +107,16 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
             this.position = position;
 
-            this.questionString.setText(question.getQuestionString());
-            timeStamp.setText("Submitted: " + question.getTimeStamp());
+            questionString.setText(question.getQuestionString());
+            timeStamp.setText("Submitted: " + formatDate(new Date(question.getTimeStamp() * 1000)));
             numAnswers.setText("Number of answers: " + question.getNumberOfAnswers());
             //userImage.setImageResource(question.getUserImageResId());
+        }
+
+        // Return a formatted date string (i.e. 1 Jan, 2000 ) from a Date object.
+        private String formatDate(Date date) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
+            return dateFormat.format(date);
         }
 
         // Only method of View.OnClickListener

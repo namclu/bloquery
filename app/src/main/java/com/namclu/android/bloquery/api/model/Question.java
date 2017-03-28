@@ -39,26 +39,27 @@ public class Question {
 
     // Creates a new Question object
     public Question(String questionString, int numberOfAnswers) {
-        mQuestionString = questionString;
-        mNumberOfAnswers = numberOfAnswers;
+        setQuestionString(questionString);
+        setNumberOfAnswers(numberOfAnswers);
     }
 
     // Creates a new Question object
     public Question(String key, String questionString, long timeStamp, int numberOfAnswers) {
-        mQuestionId = key;
-        mQuestionString = questionString;
-        mTimeStamp = timeStamp;
-        mNumberOfAnswers = numberOfAnswers;
+        setQuestionId(key);;
+        setQuestionString(questionString);
+        setTimeStamp(timeStamp);
+        setNumberOfAnswers(numberOfAnswers);
     }
 
     // Creates a new Question object
-    public Question(String key, String questionString, long timeStamp, int numberOfAnswers, String userId, int userImageResId) {
-        mQuestionId = key;
-        mQuestionString = questionString;
-        mTimeStamp = timeStamp;
-        mNumberOfAnswers = numberOfAnswers;
-        mUserId = userId;
-        mUserImageResId = userImageResId;
+    public Question(String key, String questionString, long timeStamp, int numberOfAnswers,
+                    String userId, int userImageResId) {
+        setQuestionId(key);;
+        setQuestionString(questionString);
+        setTimeStamp(timeStamp);
+        setNumberOfAnswers(numberOfAnswers);
+        setUserId(userId);
+        setUserImageResId(userImageResId);
     }
 
     public String getQuestionId() {
