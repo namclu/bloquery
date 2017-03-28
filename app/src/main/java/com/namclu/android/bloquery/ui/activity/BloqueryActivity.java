@@ -69,6 +69,13 @@ public class BloqueryActivity extends AppCompatActivity
         mQuestionsReference.addChildEventListener(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mQuestionAdapter.clear();
+    }
+
     /*
      * Firebase: Required methods of ChildEventListener
      */
