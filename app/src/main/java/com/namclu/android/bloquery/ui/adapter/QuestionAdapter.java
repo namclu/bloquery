@@ -61,13 +61,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         return mQuestions.size();
     }
 
-    // Method to clear out previous data in RecyclerView
-    public void clear() {
-        int size = mQuestions.size();
-        mQuestions.clear();
-        notifyItemRangeRemoved(0, size);
-    }
-
     /*
      * Getters and setter methods
      */

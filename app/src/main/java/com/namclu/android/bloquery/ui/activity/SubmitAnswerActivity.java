@@ -11,7 +11,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.api.AnswerDataSource;
 import com.namclu.android.bloquery.api.model.Answer;
 
 public class SubmitAnswerActivity extends AppCompatActivity implements View.OnClickListener{
@@ -19,7 +18,6 @@ public class SubmitAnswerActivity extends AppCompatActivity implements View.OnCl
     private static final String TAG = "SubmitAnswerActivity";
 
     private String mQuestionId;
-    private AnswerDataSource mAnswerDataSource;
     private EditText mEditSubmitAnswer;
     private Button mButtonSubmitAnswer;
 
