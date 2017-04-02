@@ -3,7 +3,6 @@
     <dimen name="default_padding">8dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="default_padding">8dp</dimen>
 
     <!--Login Screen-->
     <dimen name="login_vertical_padding">24dp</dimen>
