@@ -35,4 +35,8 @@
     <string name="menu_answer">Add Answer</string>
     <string name="button_text_add_answer">Add Answer</string>
 
+    <string name="menu_add_question">Add Question</string>
+    <string name="title_activity_add_question">Add Question</string>
+    <string name="button_text_add_question">Add Question</string>
+
 </resources>

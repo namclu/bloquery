@@ -46,8 +46,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
     @Override
     public QuestionAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.question_list_item, parent, false);
+
+        View inflate = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.question_list_item, parent, false);
         return new QuestionAdapterViewHolder(inflate);
     }
 
@@ -119,6 +120,5 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
                 getQuestionAdapterDelegate().onItemClicked(position, mQuestions);
             }
         }
-
     }
 }

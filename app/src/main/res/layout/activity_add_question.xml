@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Input Question -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_add_question"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:hint="Enter your question"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Button Add Question -->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/button_add_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_vertical_margin"
+        android:layout_marginBottom="@dimen/button_vertical_margin"
+        android:padding="12dp"
+        android:layout_gravity="center"
+        android:text="@string/button_text_add_question"/>
+</LinearLayout>
+
+</ScrollView>

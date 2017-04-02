@@ -43,6 +43,8 @@
             android:label="Single Question"
             android:parentActivityName=".ui.activity.BloqueryActivity">
         </activity>
+
+        <!-- Submit Answer Activity -->
         <activity
             android:name=".ui.activity.SubmitAnswerActivity"
             android:label="@string/title_activity_submit"
