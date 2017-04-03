@@ -102,7 +102,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             this.position = position;
 
             questionString.setText(question.getQuestionString());
-            timeStamp.setText("Submitted: " + formatDate(new Date(question.getTimeStamp() * 1000)));
+            timeStamp.setText("Submitted: " + formatDate(new Date(question.getTimeStamp())));
             numAnswers.setText("Number of answers: " + question.getNumberOfAnswers());
             //userImage.setImageResource(question.getUserImageResId());
         }

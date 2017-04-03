@@ -1,15 +1,18 @@
 package com.namclu.android.bloquery.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
-import com.namclu.android.bloquery.api.QuestionDataSource;
+import com.namclu.android.bloquery.api.model.Question;
 
 import static com.namclu.android.bloquery.R.id.button_add_question;
 
@@ -17,7 +20,10 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
 
     private EditText mAnswerField;
     private Button mAnswerButton;
-    private QuestionDataSource dataSource;
+
+    private DatabaseReference mQuestionReference;
+
+    private FirebaseAuth mCurrentUser = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +31,13 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_add_question);
 
         // Initialise Database
+        mQuestionReference = FirebaseDatabase.getInstance().getReference("questions");
 
         // Initialise Views
         mAnswerField = (EditText) findViewById(R.id.edit_add_question);
         mAnswerButton = (Button) findViewById(button_add_question);
 
         mAnswerButton.setOnClickListener(this);
-        dataSource = new QuestionDataSource();
     }
 
     @Override
@@ -40,7 +46,11 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, "Please enter a question...", Toast.LENGTH_SHORT).show();
         } else {
             String questionString = mAnswerField.getText().toString();
-            dataSource.writeNewQuestion(questionString, 0, 0);
+
+            String key = mQuestionReference.push().getKey();
+            String userId = mCurrentUser.getCurrentUser().getUid();
+            Question question = new Question(key, questionString, (long) System.currentTimeMillis(), 0, userId);
+            mQuestionReference.child(key).setValue(question);
 
             Toast.makeText(this, "Question added!", Toast.LENGTH_SHORT).show();
             this.finish();

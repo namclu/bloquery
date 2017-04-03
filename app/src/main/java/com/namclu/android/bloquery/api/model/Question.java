@@ -53,13 +53,12 @@ public class Question {
 
     // Creates a new Question object
     public Question(String key, String questionString, long timeStamp, int numberOfAnswers,
-                    String userId, int userImageResId) {
+                    String userId) {
         setQuestionId(key);;
         setQuestionString(questionString);
         setTimeStamp(timeStamp);
         setNumberOfAnswers(numberOfAnswers);
         setUserId(userId);
-        setUserImageResId(userImageResId);
     }
 
     public String getQuestionId() {
