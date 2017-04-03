@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +32,8 @@ import java.util.List;
 public class BloqueryActivity extends AppCompatActivity
         implements
         ChildEventListener,
-        QuestionAdapter.QuestionAdapterDelegate {
+        QuestionAdapter.QuestionAdapterDelegate,
+        AddQuestionDialog.AddQuestionDialogListener{
 
     /* Constants */
     public static final String TAG = "BloqueryActivity";
@@ -44,6 +46,8 @@ public class BloqueryActivity extends AppCompatActivity
     private RecyclerView mQueryRecyclerView;
 
     private DatabaseReference mQuestionsReference;
+
+    private FirebaseAuth mCurrentUser = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +91,6 @@ public class BloqueryActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         showEditDialog();
-        /*Intent intent = new Intent(this, AddQuestionActivity.class);
-        startActivity(intent);*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -100,7 +102,6 @@ public class BloqueryActivity extends AppCompatActivity
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
         Question question = dataSnapshot.getValue(Question.class);
         mQuestionAdapter.addQuestion(question);
-        Toast.makeText(this, "inside onChildAdded", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -144,5 +145,16 @@ public class BloqueryActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         AddQuestionDialog addQuestionDialog = AddQuestionDialog.newInstance("Ask a question");
         addQuestionDialog.show(fm, TAG);
+    }
+
+    @Override
+    public void onFinishAddQuestion(String questionString) {
+        String key = mQuestionsReference.push().getKey();
+        String userId = mCurrentUser.getCurrentUser().getUid();
+
+        Question question = new Question(key, questionString, (long) System.currentTimeMillis(), 0, userId);
+        mQuestionsReference.child(key).setValue(question);
+
+        Toast.makeText(this, "Question added!", Toast.LENGTH_SHORT).show();
     }
 }
