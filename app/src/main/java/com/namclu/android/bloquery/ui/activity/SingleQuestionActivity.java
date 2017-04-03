@@ -88,7 +88,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() ==  R.id.action_answer) {
-            Intent intent = new Intent(this, SubmitAnswerActivity.class);
+            Intent intent = new Intent(this, AddAnswerActivity.class);
             intent.putExtra("question_id_key", mQuestionId);
 
             startActivity(intent);

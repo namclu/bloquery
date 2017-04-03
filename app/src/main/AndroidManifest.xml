@@ -53,7 +53,7 @@
 
         <!-- Submit Answer Activity -->
         <activity
-            android:name=".ui.activity.SubmitAnswerActivity"
+            android:name=".ui.activity.AddAnswerActivity"
             android:label="@string/title_activity_submit"
             android:parentActivityName=".ui.activity.SingleQuestionActivity">
         </activity>
