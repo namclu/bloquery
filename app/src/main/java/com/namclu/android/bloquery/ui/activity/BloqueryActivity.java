@@ -2,6 +2,7 @@ package com.namclu.android.bloquery.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.model.Question;
 import com.namclu.android.bloquery.ui.adapter.QuestionAdapter;
+import com.namclu.android.bloquery.ui.fragment.AddQuestionDialog;
 
 import java.util.List;
 
@@ -84,8 +86,9 @@ public class BloqueryActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(this, AddQuestionActivity.class);
-        startActivity(intent);
+        showEditDialog();
+        /*Intent intent = new Intent(this, AddQuestionActivity.class);
+        startActivity(intent);*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -135,5 +138,11 @@ public class BloqueryActivity extends AppCompatActivity
         intent.putExtra(EXTRA_QUESTION_STRING, questionItem.getQuestionString());
 
         startActivity(intent);
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        AddQuestionDialog addQuestionDialog = AddQuestionDialog.newInstance("Ask a question");
+        addQuestionDialog.show(fm, TAG);
     }
 }

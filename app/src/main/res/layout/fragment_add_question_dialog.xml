@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/add_question"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:padding="@dimen/default_padding"
+              android:orientation="vertical"  >
+
+    <EditText
+        android:id="@+id/field_add_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:imeOptions="actionDone" />
+
+    <TextView
+        android:id="@+id/text_sample_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_padding"
+        android:layout_gravity="center"
+        android:text="Example: What does it feel like to win an Olympic medal?"/>
+
+</LinearLayout>
