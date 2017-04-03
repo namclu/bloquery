@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -96,6 +97,7 @@ public class BloqueryActivity extends AppCompatActivity
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
         Question question = dataSnapshot.getValue(Question.class);
         mQuestionAdapter.addQuestion(question);
+        Toast.makeText(this, "inside onChildAdded", Toast.LENGTH_SHORT).show();
     }
 
     @Override
