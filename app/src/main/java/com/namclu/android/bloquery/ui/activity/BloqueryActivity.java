@@ -63,6 +63,11 @@ public class BloqueryActivity extends AppCompatActivity
 
         // Initialise database;
         mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         // Setup event listener
         mQuestionsReference.addChildEventListener(this);
