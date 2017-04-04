@@ -30,20 +30,12 @@ public class SingleQuestionActivity extends AppCompatActivity implements
     /* Constants */
     public static final String TAG = "SingleQuestionActivity";
 
-    /* private fields */
-    private TextView userEmail;
-    private TextView questionString;
-    private TextView timeStamp;
-    private TextView numAnswers;
-    private ImageView userImage;
+    private TextView mQuestionString;
 
-    private String mQuestionId;
     private int position;
 
     private AnswerAdapter mAnswerAdapter;
 
-    // Firebase stuff
-    private DatabaseReference mQuestionsReference;
     private DatabaseReference mAnswersReference;
     private FirebaseAuth mCurrentUser;
 
@@ -54,18 +46,17 @@ public class SingleQuestionActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_single_question);
 
         // Get the intent data from BloqueryActivity
-        mQuestionId = getIntent().getStringExtra("question_id_key");
+        String questionId = getIntent().getStringExtra("question_id_key");
 
         // Initialise Views
-        userEmail = (TextView) findViewById(R.id.text_single_question_user_email);
-        questionString = (TextView) findViewById(R.id.text_single_question_string);
-        timeStamp = (TextView) findViewById(R.id.text_single_question_time_stamp);
-        numAnswers = (TextView) findViewById(R.id.text_single_question_num_answers);
-        userImage = (ImageView) findViewById(R.id.image_single_question_user_image);
+        TextView userEmail = (TextView) findViewById(R.id.text_single_question_user_email);
+        mQuestionString = (TextView) findViewById(R.id.text_single_question_string);
+        TextView timeStamp = (TextView) findViewById(R.id.text_single_question_time_stamp);
+        TextView numAnswers = (TextView) findViewById(R.id.text_single_question_num_answers);
+        ImageView userImage = (ImageView) findViewById(R.id.image_single_question_user_image);
 
         // Initialise Firebase stuff
-        mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions").child(mQuestionId);
-        mAnswersReference = FirebaseDatabase.getInstance().getReference("answers").child(mQuestionId);
+        mAnswersReference = FirebaseDatabase.getInstance().getReference("answers").child(questionId);
         mCurrentUser = FirebaseAuth.getInstance();
 
         // Set listener on Database
@@ -84,7 +75,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements
         super.onStart();
 
         // Set values for this single Question object
-        questionString.setText(getIntent().getStringExtra("question_string"));
+        mQuestionString.setText(getIntent().getStringExtra("question_string"));
     }
 
     @Override
