@@ -38,11 +38,6 @@
         </activity>
 
         <!-- Add Single Question Activity -->
-        <activity
-            android:name=".ui.activity.AddQuestionActivity"
-            android:label="Add Question"
-            android:parentActivityName=".ui.activity.BloqueryActivity">
-        </activity>
 
         <!-- Single Question Activity -->
         <activity
@@ -52,11 +47,6 @@
         </activity>
 
         <!-- Submit Answer Activity -->
-        <activity
-            android:name=".ui.activity.AddAnswerActivity"
-            android:label="@string/title_activity_add_answer"
-            android:parentActivityName=".ui.activity.SingleQuestionActivity">
-        </activity>
     </application>
 
 </manifest>

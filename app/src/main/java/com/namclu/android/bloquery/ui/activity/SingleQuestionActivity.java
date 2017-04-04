@@ -132,7 +132,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements
     @Override
     public void onFinishAddInput(String inputText) {
         if (inputText.isEmpty()) {
-            Toast.makeText(this, "Please enter a question...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter an answer...", Toast.LENGTH_SHORT).show();
         } else {
             String userId = mCurrentUser.getCurrentUser().getUid();
             String key = mAnswersReference.push().getKey();
