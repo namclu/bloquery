@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.model.Question;
 import com.namclu.android.bloquery.ui.adapter.QuestionAdapter;
-import com.namclu.android.bloquery.ui.fragment.AddQuestionDialog;
+import com.namclu.android.bloquery.ui.fragment.AddInputDialogFragment;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class BloqueryActivity extends AppCompatActivity
         implements
         ChildEventListener,
         QuestionAdapter.QuestionAdapterDelegate,
-        AddQuestionDialog.AddQuestionDialogListener {
+        AddInputDialogFragment.AddInputDialogListener {
 
     /* Constants */
     public static final String TAG = "BloqueryActivity";
@@ -142,19 +142,23 @@ public class BloqueryActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFinishAddQuestion(String questionString) {
-        String key = mQuestionsReference.push().getKey();
-        String userId = mCurrentUser.getCurrentUser().getUid();
+    public void onFinishAddInput(String inputText) {
+        if (inputText.isEmpty()) {
+            Toast.makeText(this, "Please enter a question...", Toast.LENGTH_SHORT).show();
+        } else {
+            String key = mQuestionsReference.push().getKey();
+            String userId = mCurrentUser.getCurrentUser().getUid();
 
-        Question question = new Question(key, questionString, (long) System.currentTimeMillis(), 0, userId);
-        mQuestionsReference.child(key).setValue(question);
+            Question question = new Question(key, inputText, (long) System.currentTimeMillis(), 0, userId);
+            mQuestionsReference.child(key).setValue(question);
 
-        Toast.makeText(this, "Question added!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Question added!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        AddQuestionDialog addQuestionDialog = AddQuestionDialog.newInstance("Ask a question");
-        addQuestionDialog.show(fm, TAG);
+        AddInputDialogFragment addInputDialogFragment = AddInputDialogFragment.newInstance("Ask a question");
+        addInputDialogFragment.show(fm, TAG);
     }
 }

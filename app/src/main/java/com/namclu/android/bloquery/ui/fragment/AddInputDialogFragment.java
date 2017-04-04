@@ -18,26 +18,26 @@ import com.namclu.android.bloquery.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AddQuestionDialog.AddQuestionDialogListener} interface
+ * {@link AddInputDialogListener} interface
  * to handle interaction events.
- * Use the {@link AddQuestionDialog#newInstance} factory method to
+ * Use the {@link AddInputDialogFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddQuestionDialog extends DialogFragment implements TextView.OnEditorActionListener {
+public class AddInputDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
 
     private EditText mEditText;
 
     // Listener interface with a method passing back data result.
-    public interface AddQuestionDialogListener {
-        void onFinishAddQuestion(String questionText);
+    public interface AddInputDialogListener {
+        void onFinishAddInput(String inputText);
     }
 
-    public AddQuestionDialog() {
+    public AddInputDialogFragment() {
         // Empty constructor required for DialogFragment
     }
 
-    public static AddQuestionDialog newInstance(String question) {
-        AddQuestionDialog fragment = new AddQuestionDialog();
+    public static AddInputDialogFragment newInstance(String question) {
+        AddInputDialogFragment fragment = new AddInputDialogFragment();
         Bundle args = new Bundle();
         args.putString("question", question);
         fragment.setArguments(args);
@@ -46,7 +46,7 @@ public class AddQuestionDialog extends DialogFragment implements TextView.OnEdit
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_add_question_dialog, container);
+        return inflater.inflate(R.layout.fragment_add_input_dialog, container);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AddQuestionDialog extends DialogFragment implements TextView.OnEdit
         super.onViewCreated(view, savedInstanceState);
 
         // Get field from view
-        mEditText = (EditText) view.findViewById(R.id.field_add_question);
+        mEditText = (EditText) view.findViewById(R.id.field_add_input);
         // Fetch arguments from bundle and set question
         String title = getArguments().getString("question", "Enter question");
         getDialog().setTitle(title);
@@ -73,8 +73,8 @@ public class AddQuestionDialog extends DialogFragment implements TextView.OnEdit
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
         if (EditorInfo.IME_ACTION_DONE == actionId) {
             // Return input text back to activity through the implemented listener
-            AddQuestionDialogListener listener = (AddQuestionDialogListener) getActivity();
-            listener.onFinishAddQuestion(mEditText.getText().toString());
+            AddInputDialogListener listener = (AddInputDialogListener) getActivity();
+            listener.onFinishAddInput(mEditText.getText().toString());
 
             // Close the dialog and return back to the parent activity
             dismiss();

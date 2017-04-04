@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/add_question"
+              android:id="@+id/add_input"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="center"
@@ -7,14 +7,14 @@
               android:orientation="vertical"  >
 
     <EditText
-        android:id="@+id/field_add_question"
+        android:id="@+id/field_add_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:imeOptions="actionDone" />
 
     <TextView
-        android:id="@+id/text_sample_question"
+        android:id="@+id/text_sample_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/default_padding"

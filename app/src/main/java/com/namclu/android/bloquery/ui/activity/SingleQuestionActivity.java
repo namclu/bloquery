@@ -21,11 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.model.Answer;
 import com.namclu.android.bloquery.ui.adapter.AnswerAdapter;
-import com.namclu.android.bloquery.ui.fragment.AddQuestionDialog;
+import com.namclu.android.bloquery.ui.fragment.AddInputDialogFragment;
 
 public class SingleQuestionActivity extends AppCompatActivity implements
         ChildEventListener,
-        AddQuestionDialog.AddQuestionDialogListener {
+        AddInputDialogFragment.AddInputDialogListener {
 
     /* Constants */
     public static final String TAG = "SingleQuestionActivity";
@@ -96,12 +96,6 @@ public class SingleQuestionActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         showEditDialog();
-        /*if (item.getItemId() ==  R.id.action_answer) {
-            Intent intent = new Intent(this, AddAnswerActivity.class);
-            intent.putExtra("question_id_key", mQuestionId);
-
-            startActivity(intent);
-        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -136,19 +130,23 @@ public class SingleQuestionActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFinishAddQuestion(String answerText) {
-        String userId = mCurrentUser.getCurrentUser().getUid();
-        String key = mAnswersReference.push().getKey();
+    public void onFinishAddInput(String inputText) {
+        if (inputText.isEmpty()) {
+            Toast.makeText(this, "Please enter a question...", Toast.LENGTH_SHORT).show();
+        } else {
+            String userId = mCurrentUser.getCurrentUser().getUid();
+            String key = mAnswersReference.push().getKey();
 
-        Answer answer = new Answer(userId, key, answerText, (long) System.currentTimeMillis(), 0);
-        mAnswersReference.child(key).setValue(answer);
+            Answer answer = new Answer(userId, key, inputText, (long) System.currentTimeMillis(), 0);
+            mAnswersReference.child(key).setValue(answer);
 
-        Toast.makeText(this, "Answer added!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Answer added!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
-        AddQuestionDialog addQuestionDialog = AddQuestionDialog.newInstance("Add an answer");
-        addQuestionDialog.show(fm, TAG);
+        AddInputDialogFragment addInputDialogFragment = AddInputDialogFragment.newInstance("Add an answer");
+        addInputDialogFragment.show(fm, TAG);
     }
 }
