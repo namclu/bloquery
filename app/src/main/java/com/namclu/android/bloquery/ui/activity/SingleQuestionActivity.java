@@ -1,7 +1,7 @@
 package com.namclu.android.bloquery.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,8 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
 import com.namclu.android.bloquery.api.model.Answer;
 import com.namclu.android.bloquery.ui.adapter.AnswerAdapter;
+import com.namclu.android.bloquery.ui.fragment.AddQuestionDialog;
 
-public class SingleQuestionActivity extends AppCompatActivity implements ChildEventListener{
+public class SingleQuestionActivity extends AppCompatActivity implements
+        ChildEventListener,
+        AddQuestionDialog.AddQuestionDialogListener {
 
     /* Constants */
     public static final String TAG = "SingleQuestionActivity";
@@ -37,8 +42,10 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
 
     private AnswerAdapter mAnswerAdapter;
 
+    // Firebase stuff
     private DatabaseReference mQuestionsReference;
     private DatabaseReference mAnswersReference;
+    private FirebaseAuth mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +63,10 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
         numAnswers = (TextView) findViewById(R.id.text_single_question_num_answers);
         userImage = (ImageView) findViewById(R.id.image_single_question_user_image);
 
-        // Initialise Database
+        // Initialise Firebase stuff
         mQuestionsReference = FirebaseDatabase.getInstance().getReference("questions").child(mQuestionId);
         mAnswersReference = FirebaseDatabase.getInstance().getReference("answers").child(mQuestionId);
+        mCurrentUser = FirebaseAuth.getInstance();
 
         // Set listener on Database
         mAnswersReference.addChildEventListener(this);
@@ -87,12 +95,13 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() ==  R.id.action_answer) {
+        showEditDialog();
+        /*if (item.getItemId() ==  R.id.action_answer) {
             Intent intent = new Intent(this, AddAnswerActivity.class);
             intent.putExtra("question_id_key", mQuestionId);
 
             startActivity(intent);
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -124,5 +133,22 @@ public class SingleQuestionActivity extends AppCompatActivity implements ChildEv
     @Override
     public void onCancelled(DatabaseError databaseError) {
 
+    }
+
+    @Override
+    public void onFinishAddQuestion(String answerText) {
+        String userId = mCurrentUser.getCurrentUser().getUid();
+        String key = mAnswersReference.push().getKey();
+
+        Answer answer = new Answer(userId, key, answerText, (long) System.currentTimeMillis(), 0);
+        mAnswersReference.child(key).setValue(answer);
+
+        Toast.makeText(this, "Answer added!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        AddQuestionDialog addQuestionDialog = AddQuestionDialog.newInstance("Add an answer");
+        addQuestionDialog.show(fm, TAG);
     }
 }

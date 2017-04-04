@@ -33,7 +33,7 @@ public class BloqueryActivity extends AppCompatActivity
         implements
         ChildEventListener,
         QuestionAdapter.QuestionAdapterDelegate,
-        AddQuestionDialog.AddQuestionDialogListener{
+        AddQuestionDialog.AddQuestionDialogListener {
 
     /* Constants */
     public static final String TAG = "BloqueryActivity";
@@ -141,12 +141,6 @@ public class BloqueryActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    private void showEditDialog() {
-        FragmentManager fm = getSupportFragmentManager();
-        AddQuestionDialog addQuestionDialog = AddQuestionDialog.newInstance("Ask a question");
-        addQuestionDialog.show(fm, TAG);
-    }
-
     @Override
     public void onFinishAddQuestion(String questionString) {
         String key = mQuestionsReference.push().getKey();
@@ -156,5 +150,11 @@ public class BloqueryActivity extends AppCompatActivity
         mQuestionsReference.child(key).setValue(question);
 
         Toast.makeText(this, "Question added!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        AddQuestionDialog addQuestionDialog = AddQuestionDialog.newInstance("Ask a question");
+        addQuestionDialog.show(fm, TAG);
     }
 }
