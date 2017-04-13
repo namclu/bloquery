@@ -60,7 +60,7 @@ public class BloqueryActivity extends AppCompatActivity
         mQuestionAdapter.setQuestionAdapterDelegate(this);
 
         // Initialize Views in the layout
-        mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_question);
+        mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_bloquery);
 
         // Set the layout, animator, and adapter for RecyclerView
         mQueryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
