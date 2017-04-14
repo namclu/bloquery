@@ -1,12 +1,17 @@
 package com.namclu.android.bloquery.ui.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -42,17 +47,21 @@ public class BloqueryActivity extends AppCompatActivity
     public static final String EXTRA_USER_EMAIL = "user_email";
 
     private QuestionAdapter mQuestionAdapter;
-
     private RecyclerView mQueryRecyclerView;
-
     private DatabaseReference mQuestionsReference;
-
     private FirebaseAuth mCurrentUser = FirebaseAuth.getInstance();
+    // Use DrawerLayout
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bloquery);
+
+        // Add Actionbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_bloquery);
+        setSupportActionBar(toolbar);
 
         // Initialize the adapter
         mQuestionAdapter = new QuestionAdapter();
@@ -72,12 +81,31 @@ public class BloqueryActivity extends AppCompatActivity
 
         // Setup event listener
         mQuestionsReference.addChildEventListener(this);
+
+        // Initialise ActionBar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_bloquery);
+
+        // Initialise mDrawerToggle and implement DrawLayout listener
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
         mQuestionsReference.removeEventListener(this);
     }
 
@@ -90,7 +118,13 @@ public class BloqueryActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        showEditDialog();
+        if (item.getItemId() == R.id.action_add_question_bloquery) {
+            showEditDialog();
+        }
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

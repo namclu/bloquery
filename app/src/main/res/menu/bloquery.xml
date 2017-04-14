@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_bloquery"
+    <item android:id="@+id/action_add_question_bloquery"
           android:icon="@drawable/ic_more_vert_black_24dp"
           android:title="@string/menu_add_question"
           android:orderInCategory="0"
