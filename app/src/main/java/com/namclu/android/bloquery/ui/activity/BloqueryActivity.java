@@ -47,7 +47,7 @@ public class BloqueryActivity extends AppCompatActivity
     public static final String TAG = "BloqueryActivity";
     public static final String EXTRA_QUESTION_ID_KEY = "question_id_key";
     public static final String EXTRA_QUESTION_STRING = "question_string";
-    public static final String EXTRA_USER_EMAIL = "user_email";
+    public static final String EXTRA_CURRENT_USER = "current_user_email";
 
     private QuestionAdapter mQuestionAdapter;
     private RecyclerView mQueryRecyclerView;
@@ -68,12 +68,12 @@ public class BloqueryActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_bloquery);
         setSupportActionBar(toolbar);
 
-        // Initialize the adapter
+        // Initialise the adapter
         mQuestionAdapter = new QuestionAdapter();
         // Set BloqueryActivity(this) as QuestionAdapter's delegate
         mQuestionAdapter.setQuestionAdapterDelegate(this);
 
-        // Initialize Views in the layout
+        // Initialise Views in the layout
         mQueryRecyclerView = (RecyclerView) findViewById(R.id.recycler_bloquery);
 
         // Set the layout, animator, and adapter for RecyclerView
@@ -161,8 +161,11 @@ public class BloqueryActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.nav_user_profile) {
-            Toast.makeText(this, "User profile selected", Toast.LENGTH_SHORT).show();
             mDrawerLayout.closeDrawer(mNavigationView);
+
+            Intent intent = new Intent(this, UserProfileActivity.class);
+            intent.putExtra(EXTRA_CURRENT_USER, mCurrentUser.getCurrentUser().getEmail());
+            startActivity(intent);
         }
         if (item.getItemId() == R.id.nav_log_out) {
             Toast.makeText(this, "Log out selected", Toast.LENGTH_SHORT).show();

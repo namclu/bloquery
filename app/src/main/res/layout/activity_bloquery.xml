@@ -17,9 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:background="?attr/colorPrimary">
-
-        </android.support.v7.widget.Toolbar>
+            android:background="?attr/colorPrimary"/>
 
         <!-- Main content view -->
         <android.support.v7.widget.RecyclerView

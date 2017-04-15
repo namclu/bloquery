@@ -17,7 +17,7 @@
         <!-- Sign Up Activity -->
         <activity
             android:name=".ui.activity.SignUpActivity"
-            android:label="@string/title_activity_signup">
+            android:label="@string/title_sign_up">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -28,25 +28,28 @@
         <!-- Login Activity -->
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="@string/title_login">
         </activity>
 
         <!-- Bloquery Activity -->
         <activity
             android:name=".ui.activity.BloqueryActivity"
-            android:label="@string/title_activity_bloquery">
+            android:label="@string/title_bloquery">
         </activity>
-
-        <!-- Add Single Question Activity -->
 
         <!-- Single Question Activity -->
         <activity
             android:name=".ui.activity.SingleQuestionActivity"
-            android:label="Single Question"
+            android:label="@string/title_single_question"
             android:parentActivityName=".ui.activity.BloqueryActivity">
         </activity>
 
-        <!-- Submit Answer Activity -->
+        <!-- User Profile Activity -->
+        <activity
+            android:name=".ui.activity.UserProfileActivity"
+            android:label="@string/title_user_profile"
+            android:parentActivityName=".ui.activity.BloqueryActivity">
+        </activity>
     </application>
 
 </manifest>

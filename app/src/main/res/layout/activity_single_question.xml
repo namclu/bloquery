@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context="com.namclu.android.bloquery.ui.activity.SingleQuestionActivity">
 
+    <!-- Actionbar -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_single_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"/>
+
     <!-- Question resides at the top -->
     <TextView
         android:id="@+id/text_single_question_user_email"

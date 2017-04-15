@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -44,6 +45,10 @@ public class SingleQuestionActivity extends AppCompatActivity implements
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_question);
+
+        // Add Actionbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_single_question);
+        setSupportActionBar(toolbar);
 
         // Get the intent data from BloqueryActivity
         String questionId = getIntent().getStringExtra("question_id_key");
