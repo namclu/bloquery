@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_item_1"
-            android:icon="@drawable/ic_mood_black_24dp"
-            android:title="nav item 1"/>
-        <item
-            android:id="@+id/nav_item_2"
+            android:id="@+id/nav_user_profile"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="nav item 2"/>
+            android:title="User Profile"/>
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/ic_warning_black_24dp"
+            android:title="Log Out"/>
     </group>
 </menu>

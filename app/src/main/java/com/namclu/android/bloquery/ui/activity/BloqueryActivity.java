@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -38,7 +39,8 @@ public class BloqueryActivity extends AppCompatActivity
         implements
         ChildEventListener,
         QuestionAdapter.QuestionAdapterDelegate,
-        AddInputDialogFragment.AddInputDialogListener {
+        AddInputDialogFragment.AddInputDialogListener,
+        NavigationView.OnNavigationItemSelectedListener{
 
     /* Constants */
     public static final String TAG = "BloqueryActivity";
@@ -53,6 +55,8 @@ public class BloqueryActivity extends AppCompatActivity
     // Use DrawerLayout
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    // Use Navigation options
+    private NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +93,10 @@ public class BloqueryActivity extends AppCompatActivity
         // Initialise mDrawerToggle and implement DrawLayout listener
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+        // Initialise NavigationView and set Listener
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_items_bloquery);
+        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -116,6 +124,9 @@ public class BloqueryActivity extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    /*
+    * When Actionbar is selected, respond to NavigationDrawer or Overflow menu
+    * */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_add_question_bloquery) {
@@ -127,6 +138,22 @@ public class BloqueryActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /*
+    * When NavigationDrawerItem is selected, respond to action
+    * */
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.nav_user_profile) {
+            Toast.makeText(this, "User profile selected", Toast.LENGTH_SHORT).show();
+            mDrawerLayout.closeDrawer(mNavigationView);
+        }
+        if (item.getItemId() == R.id.nav_log_out) {
+            Toast.makeText(this, "Log out selected", Toast.LENGTH_SHORT).show();
+            mDrawerLayout.closeDrawer(mNavigationView);
+        }
+        return true;
     }
 
     /*
