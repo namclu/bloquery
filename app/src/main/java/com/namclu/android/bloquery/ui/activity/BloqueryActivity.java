@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -91,7 +92,21 @@ public class BloqueryActivity extends AppCompatActivity
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_bloquery);
 
         // Initialise mDrawerToggle and implement DrawLayout listener
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+            /* Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View drawerView){
+                super.onDrawerClosed(drawerView);
+                invalidateOptionsMenu();
+            }
+
+            /* Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+        };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         // Initialise NavigationView and set Listener
@@ -154,6 +169,17 @@ public class BloqueryActivity extends AppCompatActivity
             mDrawerLayout.closeDrawer(mNavigationView);
         }
         return true;
+    }
+
+    /*
+     * Called whenever we call invalidateOptionsMenu()
+     * */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mNavigationView);
+        menu.findItem(R.id.action_add_question_bloquery).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     /*

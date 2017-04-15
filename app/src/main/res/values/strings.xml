@@ -39,4 +39,6 @@
     <string name="menu_add_question">Add Question</string>
     <string name="button_text_add_question">Add Question</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>
