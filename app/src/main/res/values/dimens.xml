@@ -11,4 +11,6 @@
 
     <!-- Buttons -->
     <dimen name="button_vertical_margin">24dp</dimen>
+    <dimen name="nav_item_title_height">48dp</dimen>
+    <dimen name="nav_item_horizontal_padding">16dp</dimen>
 </resources>
