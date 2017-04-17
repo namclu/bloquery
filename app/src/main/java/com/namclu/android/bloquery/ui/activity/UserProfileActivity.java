@@ -3,6 +3,7 @@ package com.namclu.android.bloquery.ui.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.namclu.android.bloquery.R;
@@ -27,9 +28,11 @@ public class UserProfileActivity extends AppCompatActivity {
         String userEmail = getIntent().getStringExtra("current_user_email");
 
         // Initialise views
+        ImageView imageUserImage = (ImageView) findViewById(R.id.image_user_profile_image);
         TextView textUserEmail = (TextView) findViewById(R.id.text_user_profile_email);
 
-        // Set text
+        // Set views
+        imageUserImage.setImageResource(R.drawable.common_full_open_on_phone);
         textUserEmail.setText(String.format("%s", userEmail));
     }
 }

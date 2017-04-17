@@ -11,9 +11,9 @@ public class UserLogin {
     private String mPassword;
 
     public UserLogin(String fullName, String email, String password) {
-        mFullName = fullName;
-        mEmail = email;
-        mPassword = password;
+        setFullName(fullName);
+        setEmail(email);
+        setPassword(password);
     }
 
     public String getFullName() {

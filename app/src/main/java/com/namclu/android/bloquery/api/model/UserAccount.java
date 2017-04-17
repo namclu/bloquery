@@ -12,10 +12,10 @@ public class UserAccount {
     private String mUserLocation;
 
     public UserAccount(long userID, boolean userImage, String userBio, String userLocation) {
-        mUserID = userID;
-        mUserImage = userImage;
-        mUserBio = userBio;
-        mUserLocation = userLocation;
+        setUserID(userID);
+        setUserImage(userImage);
+        setUserBio(userBio);
+        setUserLocation(userLocation);
     }
 
     public long getUserID() {
