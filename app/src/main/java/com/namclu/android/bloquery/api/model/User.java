@@ -13,8 +13,7 @@ public class User {
     private String mUserBio;
     private String mUserLocation;
 
-    public User(String userId, boolean profileImage, String profileImageUrl, String userEmail) {
-        setUserId(userId);
+    public User(boolean profileImage, String profileImageUrl, String userEmail) {
         setProfileImage(profileImage);
         setProfileImageUrl(profileImageUrl);
         setUserEmail(userEmail);

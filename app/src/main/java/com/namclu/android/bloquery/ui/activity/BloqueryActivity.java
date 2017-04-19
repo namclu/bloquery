@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,8 +52,10 @@ public class BloqueryActivity extends AppCompatActivity
 
     private QuestionAdapter mQuestionAdapter;
     private RecyclerView mQueryRecyclerView;
+    // Firebase stuff
     private DatabaseReference mQuestionsReference;
-    private FirebaseAuth mCurrentUser = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
     // Use DrawerLayout
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -67,6 +70,10 @@ public class BloqueryActivity extends AppCompatActivity
         // Add Actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_bloquery);
         setSupportActionBar(toolbar);
+
+        // Initialise Firebase objects
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Initialise the adapter
         mQuestionAdapter = new QuestionAdapter();
@@ -164,12 +171,17 @@ public class BloqueryActivity extends AppCompatActivity
             mDrawerLayout.closeDrawer(mNavigationView);
 
             Intent intent = new Intent(this, UserProfileActivity.class);
-            intent.putExtra(EXTRA_CURRENT_USER, mCurrentUser.getCurrentUser().getEmail());
+            intent.putExtra(EXTRA_CURRENT_USER, mCurrentUser.getEmail());
             startActivity(intent);
         }
         if (item.getItemId() == R.id.nav_log_out) {
             Toast.makeText(this, "Log out selected", Toast.LENGTH_SHORT).show();
             mDrawerLayout.closeDrawer(mNavigationView);
+
+            mAuth.signOut();
+
+            Intent intent = new Intent(this, SignUpActivity.class);
+            startActivity(intent);
         }
         return true;
     }
@@ -237,7 +249,7 @@ public class BloqueryActivity extends AppCompatActivity
             Toast.makeText(this, "Please enter a question...", Toast.LENGTH_SHORT).show();
         } else {
             String key = mQuestionsReference.push().getKey();
-            String userId = mCurrentUser.getCurrentUser().getUid();
+            String userId = mCurrentUser.getUid();
 
             Question question = new Question(key, inputText, (long) System.currentTimeMillis(), 0, userId);
             mQuestionsReference.child(key).setValue(question);

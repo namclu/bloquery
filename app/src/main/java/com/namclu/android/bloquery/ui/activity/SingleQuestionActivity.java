@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +39,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements
     private AnswerAdapter mAnswerAdapter;
 
     private DatabaseReference mAnswersReference;
-    private FirebaseAuth mCurrentUser;
+    private FirebaseUser mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements
 
         // Initialise Firebase stuff
         mAnswersReference = FirebaseDatabase.getInstance().getReference("answers").child(questionId);
-        mCurrentUser = FirebaseAuth.getInstance();
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Set listener on Database
         mAnswersReference.addChildEventListener(this);
@@ -130,7 +131,7 @@ public class SingleQuestionActivity extends AppCompatActivity implements
         if (inputText.isEmpty()) {
             Toast.makeText(this, "Please enter an answer...", Toast.LENGTH_SHORT).show();
         } else {
-            String userId = mCurrentUser.getCurrentUser().getUid();
+            String userId = mCurrentUser.getUid();
             String key = mAnswersReference.push().getKey();
 
             Answer answer = new Answer(userId, key, inputText, (long) System.currentTimeMillis(), 0);

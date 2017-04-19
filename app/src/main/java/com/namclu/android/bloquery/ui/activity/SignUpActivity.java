@@ -17,7 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.namclu.android.bloquery.R;
+import com.namclu.android.bloquery.api.model.User;
 
 /**
  * Created by namlu on 03-Aug-16.
@@ -42,11 +45,10 @@ public class SignUpActivity extends AppCompatActivity {
     private Button mCreateAccountButton;
     private TextView mLoginLink;
 
-    // Create reference to Firebase mAuth
+    // Firebase objects
     private FirebaseAuth mAuth;
-
-    // Create reference to Firebase mAuthStateListener
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private DatabaseReference mUsersReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +64,9 @@ public class SignUpActivity extends AppCompatActivity {
         mCreateAccountButton = (Button) findViewById(R.id.button_create_account);
         mLoginLink = (TextView) findViewById(R.id.link_login_account);
 
-        // Initialize Firebase mAuth object
+        // Initialize Firebase objects
         mAuth = FirebaseAuth.getInstance();
+        mUsersReference = FirebaseDatabase.getInstance().getReference("users");
 
         // Create AuthStateListener to respond to changes in user signin state
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -144,12 +147,15 @@ public class SignUpActivity extends AppCompatActivity {
                         // If sign in fails, display a message to the user.
                         // If sign in succeeds the auth state listener will be notified
                         // and logic to handle the signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(SignUpActivity.this, R.string.auth_failed,
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
+                        if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this,
                                     "Welcome " + mAuth.getCurrentUser().getEmail(),
+                                    Toast.LENGTH_SHORT).show();
+                            // Create new user
+                            User user = new User(false, "", mAuth.getCurrentUser().getEmail());
+                            mUsersReference.child(mAuth.getCurrentUser().getUid()).setValue(user);
+                        } else {
+                            Toast.makeText(SignUpActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
                         }
 
