@@ -182,6 +182,7 @@ public class BloqueryActivity extends AppCompatActivity
 
             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
+            finish();
         }
         return true;
     }
