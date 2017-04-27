@@ -1,14 +1,23 @@
 package com.namclu.android.bloquery.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.namclu.android.bloquery.R;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by namlu on 15-April-17.
@@ -17,7 +26,10 @@ import com.namclu.android.bloquery.R;
  */
 public class UserProfileActivity extends AppCompatActivity {
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_TAKE_PHOTO = 1;
+
+    private ImageView mImageUserImage;
+    private String mCurrentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +44,56 @@ public class UserProfileActivity extends AppCompatActivity {
         String userEmail = getIntent().getStringExtra("current_user_email");
 
         // Initialise views
-        ImageView imageUserImage = (ImageView) findViewById(R.id.image_user_profile_image);
+        mImageUserImage = (ImageView) findViewById(R.id.image_user_profile_image);
         TextView textUserEmail = (TextView) findViewById(R.id.text_user_profile_email);
 
         // Set views
-        imageUserImage.setImageResource(R.drawable.common_full_open_on_phone);
+        mImageUserImage.setImageResource(R.drawable.common_full_open_on_phone);
         textUserEmail.setText(String.format("%s", userEmail));
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageUserImage.setImageBitmap(imageBitmap);
+        }
+    }
+
+    // Invokes an Intent to capture a photo
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         // Performing this check is important because if you call startActivityForResult()
         // using an intent that no app can handle, your app will crash
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            // Create file where photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating file
+            }
+
+            if (photoFile != null) {
+                Uri photoUri = FileProvider.getUriForFile(
+                        this, "com.namclu.android.bloquery", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
         }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create image file name
+        String timeStamp = new SimpleDateFormat("yyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }
