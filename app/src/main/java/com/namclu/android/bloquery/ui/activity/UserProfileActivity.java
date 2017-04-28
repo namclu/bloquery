@@ -9,6 +9,8 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +31,8 @@ public class UserProfileActivity extends AppCompatActivity {
     static final int REQUEST_TAKE_PHOTO = 1;
 
     private ImageView mImageUserImage;
+    private TextView mTextUserEmail;
+    private Button mButtonTakePhoto;
     private String mCurrentPhotoPath;
 
     @Override
@@ -45,11 +49,19 @@ public class UserProfileActivity extends AppCompatActivity {
 
         // Initialise views
         mImageUserImage = (ImageView) findViewById(R.id.image_user_profile_image);
-        TextView textUserEmail = (TextView) findViewById(R.id.text_user_profile_email);
+        mTextUserEmail = (TextView) findViewById(R.id.text_user_profile_email);
+        mButtonTakePhoto = (Button) findViewById(R.id.button_user_profile_take_photo);
 
         // Set views
         mImageUserImage.setImageResource(R.drawable.common_full_open_on_phone);
-        textUserEmail.setText(String.format("%s", userEmail));
+        mTextUserEmail.setText(String.format("%s", userEmail));
+
+        mButtonTakePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dispatchTakePictureIntent();
+            }
+        });
     }
 
     @Override
