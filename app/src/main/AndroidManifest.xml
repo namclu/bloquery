@@ -54,6 +54,17 @@
             android:label="@string/title_user_profile"
             android:parentActivityName=".ui.activity.BloqueryActivity">
         </activity>
+
+        <!-- Configure the FileProvider -->
+        <provider
+            android:authorities="com.namclu.android.bloquery"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
     </application>
 
 </manifest>
