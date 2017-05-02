@@ -30,13 +30,18 @@ If you're using the latest version of Android Studio (version 2.2 or later), use
 
 For more information about how to add Firebase to your project follow this [link](https://firebase.google.com/docs/android/setup).
 
+## Built With
+
+- [Google Firebase](https://console.firebase.google.com) is a mobile and web application development platform.
+
+## Updates and Issues
+
+- 02/05/2017 - Add feature in User Profile to take photo for user profile. App currently crashes when attempting to capture photo.
+
 ## Author(s)
 
 - Nam Lu - [GitHub](https://github.com/namclu)
 
-## Acknowledgements
-
-- [Google Firebase](https://console.firebase.google.com)
 
 ## Screenshots
 <img src="/screenshots/sc_create_new_account.png" width="280" height="480"> <img src="/screenshots/sc_existing_user_login.png" width="280" height="480"> <img src="/screenshots/sc_questions_view.png" width="280" height="480"> <img src="/screenshots/sc_add_question_dialog.png" width="280" height="480"> <img src="/screenshots/sc_single_question_view.png" width="280" height="480">
